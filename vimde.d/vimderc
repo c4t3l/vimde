@@ -1,0 +1,87 @@
+syntax on
+set nocompatible
+filetype off
+
+
+" Vundle initialize
+" If you choose to update vundle on your own, incomment the following line.
+"set rtp+=~/.vimde/bundle/Vundle.vim
+set rtp+=/usr/share/vimde/bundle/Vundle.vim-b255382d6242d7ea3877bf059d2934125e0c4d95
+call vundle#begin('~/.vimde/bundle')
+
+Plugin 'deoplete-jedi-42f4c24a951b0fb5e76a70e5234f16193a8a746d', {'pinned': 1}
+Plugin 'deoplete.nvim-5.2', {'pinned': 1}
+Plugin 'nvim-yarp-b710bf4daccb603a423754794fb446e5fbb59576', {'pinned': 1}
+Plugin 'salt-vim-6ca9e3500cc39dd417b411435d58a1b720b331cc', {'pinned': 1}
+Plugin 'vim-auto-save-0.1.7', {'pinned': 1}
+Plugin 'vim-colorschemes-9e7ab1cfec5d3db85aa1c4e87329fd869ecf94e9', {'pinned': 1}
+Plugin 'vim-hug-neovim-rpc-86e82de95e2a318589b718fef22eaeca1a3e3e04', {'pinned': 1}
+Plugin 'Vim-Jinja2-Syntax-b59d179defbc9fd6e6f426569f8430592e1a6a1b', {'pinned': 1}
+Plugin 'vimux-37f41195e6369ac602a08ec61364906600b771f1', {'pinned': 1}
+Plugin 'Vundle.vim-b255382d6242d7ea3877bf059d2934125e0c4d95', {'pinned': 1}
+Plugin 'supertab-40fe711e088e2ab346738233dd5adbb1be355172', {'pinned': 1}
+
+call vundle#end()
+
+" Required plugin settings
+filetype plugin indent on
+
+" Activate Deoplete autocompletions
+let g:python3_host_prog='/usr/bin/python3'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#enable_typeinfo = 0
+
+" Rulers, colors, etc.
+set number
+color Monokai
+set backspace="indent,eol,start"
+
+" Set leader mapping to spacebar
+nnoremap <SPACE> <Nop>
+let mapleader = " " 
+
+" Set syntax for files
+autocmd BufNewFile,BufRead *vimderc set syntax=vim
+autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
+
+" Set autosave
+let g:auto_save = 1
+let g:auto_save_in_insert_mode = 1
+let g:auto_save_no_updatetime = 1
+
+" Force use of Django template syntax
+let g:sls_use_jinja_syntax = 1
+
+" NerdTree settings
+autocmd VimEnter * NERDTree .
+let NERDTreeShowHidden=1
+nnoremap <leader>nt :NERDTreeToggle<CR>
+
+" Jump to the main window
+autocmd VimEnter * wincmd p
+
+" Kitchen bindings
+nnoremap <leader>kl :call VimuxRunCommand("kitchen list")<CR>
+nnoremap <leader>kd :call VimuxRunCommand("kitchen destroy")<CR>
+nnoremap <leader>kt :call VimuxRunCommand("kitchen test")<CR>
+nnoremap <leader>kc :call VimuxPromptCommand("kitchen converge ")<CR>
+nnoremap <leader>kv :call VimuxPromptCommand("kitchen verify ")<CR>
+
+" Generic Vimux  bindings
+nnoremap <leader>to :call VimuxOpenRunner()<CR>  
+nnoremap <leader>tq :call VimuxCloseRunner()<CR> 
+nnoremap <leader>tl :call VimuxRunLastCommand()<CR> 
+nnoremap <leader>ts :call VimuxInterruptRunner()<CR>
+nnoremap <leader>tc :call VimuxClearRunnerHistory()<CR>
+
+" RPM bindings
+nnoremap <leader>m :call VimuxRunCommand("spectool -g -R *.spec")<CR> 
+nnoremap <leader>bs :call VimuxRunCommand("rpmbuild -bs *.spec")<CR> 
+
+" Force vim split navigation to better match tmux
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+

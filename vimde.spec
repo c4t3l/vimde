@@ -35,7 +35,7 @@ Release:        1.eog%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
 
 
-License:        EOG Proprietary
+License:        Apache 2.0
 URL:            https://git.eogresources.com/eog/pkg-vimde
 
 Source0:        https://git.eogresources.com/eog/pkg-vimde
@@ -52,20 +52,20 @@ Source10:	https://github.com/roxma/vim-hug-neovim-rpc/archive/%{hug_lc}/vim-hug-
 Source11:	https://github.com/deoplete-plugins/deoplete-jedi/archive/%{deojedi_lc}/deoplete-jedi-%{deojedi_sc}.tar.gz
 Source12:	https://github.com/ervandew/supertab/archive/%{supertab_lc}/supertab-%{supertab_sc}.tar.gz
 
-
-
-# These are needed for YCM
 Requires:	ctags
 Requires:	git
-Requires:	python3
+Requires:	python3 >= 3.8
 Requires:	python3-pudb
 Requires:	python3-msgpack
 Requires:	python3-neovim
 Requires:	tmux >= 2.9
 Requires:	tmux-powerline
 Requires:	vim-enhanced >= 8.0
+Requires: 	vim-fugitive
 Requires:	vim-nerdtree
 Requires:	vim-powerline
+Requires: 	vim-syntastic-python
+Requires: 	vim-syntastic-yaml
 
 
 %description
@@ -88,5 +88,5 @@ file.
 
 
 %changelog
-* Sat Apr 18 2020 Robby Callicotte <robby_callicotte@eogresources.com> - 2020.4.0-1.eog
+* Sat Apr 18 2020 Robby Callicotte <rcallicotte@gmail.com> - 2020.4.0-1.eog
 - Initial build

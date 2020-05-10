@@ -66,6 +66,7 @@ Requires:	vim-nerdtree
 Requires:	vim-powerline
 Requires: 	vim-syntastic-python
 Requires: 	vim-syntastic-yaml
+Requires: 	wemux
 
 
 %description

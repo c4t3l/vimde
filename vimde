@@ -16,13 +16,24 @@ import sys
 import argparse
 import getpass
 
+__version__ = '2020.5.0'
+
+if sys.version_info < (3, 8):
+    die('Sorry, vimde needs at least Python 3.8')
+
 
 def init_environment():
     """
-    Copies the global configs to $HOME.
+    Creates the $HOME/.vimde and $HOME/.tmuxde dirs.
     This function is destructive to user vimderc and tmuxderc if LockFile
     does not exist.  
     """
+
+    vimde_dir = pathlib.Path.home().joinpath('.vimde')
+    tmuxde_dir = pathlib.Path.home().joinpath('.tmuxde')
+
+    vimde_dir.mkdir(exist_ok=True)
+    tmuxde_dir.mkdir(exist_ok=True)
 
     if _lockfile():
         die('[WARNING] ~/.vimde/LockFile exists!!  Cowardly refusing to ' \
@@ -69,7 +80,7 @@ def copy_plugins():
     user_tmux_plugins_path = pathlib.Path.home().joinpath('.tmuxde/plugins')
 
     vim_copy = shutil.copytree(system_vim_plugins_path, user_vim_plugins_path, dirs_exist_ok=True)
-    return my_copy
+    return vim_copy
 
 
 def install_plugins(update=False):

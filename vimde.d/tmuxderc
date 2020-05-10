@@ -30,5 +30,5 @@ bind l select-pane -R
 set -g default-terminal "screen-256color"
 
 # Initialize theme
-source-file "/usr/share/tmuxde/tmux-themepack-7c59902f64dcd7ea356e891274b21144d1ea5948/powerline/double/blue.tmuxtheme"
+source-file "/usr/share/tmuxde/plugins/tmux-themepack-7c59902f64dcd7ea356e891274b21144d1ea5948/powerline/double/orange.tmuxtheme"
 

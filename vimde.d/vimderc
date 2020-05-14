@@ -78,6 +78,9 @@ nnoremap <leader>tc :call VimuxClearRunnerHistory()<CR>
 nnoremap <leader>m :call VimuxRunCommand("spectool -g -R *.spec")<CR> 
 nnoremap <leader>bs :call VimuxRunCommand("rpmbuild -bs *.spec")<CR> 
 
+" Python interpreter bindings
+nnoremap <leader>py :call VimuxRunCommand("python")<CR>
+
 " Force vim split navigation to better match tmux
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>

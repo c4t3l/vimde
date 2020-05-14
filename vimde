@@ -7,14 +7,14 @@ RPM, or python development.  It can, of course, be extended any
 number of ways.
 '''
 
-import pathlib
-import shutil
-import shlex
-import subprocess
-import setproctitle
-import sys
 import argparse
 import getpass
+import pathlib
+import shlex
+import shutil
+import subprocess
+import sys
+import setproctitle
 
 __version__ = '2020.5.0'
 
@@ -26,7 +26,7 @@ def init_environment():
     """
     Creates the $HOME/.vimde and $HOME/.tmuxde dirs.
     This function is destructive to user vimderc and tmuxderc if LockFile
-    does not exist.  
+    does not exist. 
     """
 
     vimde_dir = pathlib.Path.home().joinpath('.vimde')
@@ -44,7 +44,7 @@ def init_environment():
         copy_plugins()
         install_plugins()
         return sys.stderr.write('[INFO] VimDE environment initialized. ' \
-                                    'Please restart VimDE.\n') 
+                                    'Please restart VimDE.\n')
 
 
 def copy_configs():

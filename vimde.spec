@@ -64,15 +64,17 @@ Source14: 	https://github.com/christoomey/vim-tmux-navigator/archive/%{vtnav_lc}
 Requires:	ctags
 Requires:	git
 Requires:	python3 >= 3.8
-Requires:	python3-pudb
 Requires:	python3-msgpack
 Requires:	python3-neovim
+Requires:	python3-pudb
 Requires:	tmux >= 2.9
 Requires:	tmux-powerline
 Requires:	vim-enhanced >= 8.0
-Requires: 	vim-fugitive
 Requires:	vim-nerdtree
 Requires:	vim-powerline
+Requires: 	pandoc
+Requires: 	surf
+Requires: 	vim-fugitive
 Requires: 	vim-syntastic-python
 Requires: 	vim-syntastic-yaml
 Requires: 	wemux

@@ -62,6 +62,9 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 " Jump to the main window
 autocmd VimEnter * wincmd p
 
+" Supertab reverse scroll
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " Kitchen bindings
 nnoremap <leader>kl :call VimuxRunCommand("kitchen list")<CR>
 nnoremap <leader>kd :call VimuxRunCommand("kitchen destroy")<CR>

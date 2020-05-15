@@ -20,7 +20,7 @@ Plugin 'Vim-Jinja2-Syntax-b59d179defbc9fd6e6f426569f8430592e1a6a1b', {'pinned': 
 Plugin 'vimux-37f41195e6369ac602a08ec61364906600b771f1', {'pinned': 1}
 Plugin 'Vundle.vim-b255382d6242d7ea3877bf059d2934125e0c4d95', {'pinned': 1}
 Plugin 'supertab-40fe711e088e2ab346738233dd5adbb1be355172', {'pinned': 1}
-Plugin 'nerdtree-fugitive-f7acffdc05b5db893daa8201f3ff85945da50fcb', {'pinned': 1}
+Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()
 
@@ -31,6 +31,7 @@ filetype plugin indent on
 let g:python3_host_prog='/usr/bin/python3'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 0
+" let yarp = true
 
 " Rulers, colors, etc.
 set number

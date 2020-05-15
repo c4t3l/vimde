@@ -117,15 +117,10 @@ def _lockfile(create=False):
 
     if create:
         my_lock = pathlib.Path.touch(lock)
-        #return my_lock
+        return my_lock
 
     else:
-        if lock.exists():
-            #return True
-            my_lock = True
-
-    return my_lock 
-
+        return lock.exists()
 
 
 

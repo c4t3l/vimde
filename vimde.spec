@@ -25,6 +25,9 @@
 %global	vimux_lc 37f41195e6369ac602a08ec61364906600b771f1
 %global vimux_sc %(c=%{vimux_lc}; echo ${c:0:7})
 
+%global vtnav_lc 44ba6fbe45895cd541ebfc87606add5c76e3829b
+%global vtnav_sc %(c=%{vtnav_lc}; echo ${c:0:7})
+
 %global	vundle_lc b255382d6242d7ea3877bf059d2934125e0c4d95
 %global vundle_sc %(c=%{vundle_lc}; echo ${c:0:7})
 
@@ -55,6 +58,8 @@ Source10:	https://github.com/roxma/vim-hug-neovim-rpc/archive/%{hug_lc}/vim-hug-
 Source11:	https://github.com/deoplete-plugins/deoplete-jedi/archive/%{deojedi_lc}/deoplete-jedi-%{deojedi_sc}.tar.gz
 Source12:	https://github.com/ervandew/supertab/archive/%{supertab_lc}/supertab-%{supertab_sc}.tar.gz
 Source13: 	https://github.com/low-ghost/nerdtree-fugitive/archive/%{ntf_lc}/nerdtree-fugitive-%{ntf_sc}.tar.gz
+Source14: 	https://github.com/christoomey/vim-tmux-navigator/archive/%{vtnav_lc}/vim-tmux-navigator-%{vtnav_sc}.tar.gz
+
 
 Requires:	ctags
 Requires:	git

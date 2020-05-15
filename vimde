@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 '''
-VimDE wrapper for python.  This wrapper script simply calls specially 
-configured versions of tmux and vim for use as an IDE for Saltstack, 
-RPM, or python development.  It can, of course, be extended any 
+VimDE wrapper for python.  This wrapper script simply calls specially
+configured versions of tmux and vim for use as an IDE for Saltstack,
+RPM, or python development.  It can, of course, be extended any
 number of ways.
 '''
 
@@ -26,7 +26,7 @@ def init_environment():
     """
     Creates the $HOME/.vimde and $HOME/.tmuxde dirs.
     This function is destructive to user vimderc and tmuxderc if LockFile
-    does not exist. 
+    does not exist.
     """
 
     vimde_dir = pathlib.Path.home().joinpath('.vimde')
@@ -116,12 +116,9 @@ def _lockfile(create=False):
     lock = pathlib.Path.home().joinpath('.vimde/LockFile')
 
     if create:
-        my_lock = pathlib.Path.touch(lock)
-        return my_lock
+        pathlib.Path.touch(lock)
 
-    else:
-        return lock.exists()
-
+    return lock.exists()
 
 
 def die(msg):

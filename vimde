@@ -47,6 +47,7 @@ def init_environment():
                                     'Please restart VimDE.\n')
 
 
+
 def copy_configs():
     """
     Copy system config files to the user home directory
@@ -71,7 +72,7 @@ def copy_configs():
 
 def copy_plugins():
     """
-    Copies plugins from base install path to user path. 
+    Copies plugins from base install path to user path.
     """
 
     system_vim_plugins_path = pathlib.Path('/usr/share/vimde/bundle')
@@ -116,11 +117,16 @@ def _lockfile(create=False):
 
     if create:
         my_lock = pathlib.Path.touch(lock)
-        return my_lock
+        #return my_lock
 
     else:
         if lock.exists():
-            return True
+            #return True
+            my_lock = True
+
+    return my_lock 
+
+
 
 
 def die(msg):

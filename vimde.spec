@@ -7,6 +7,9 @@
 %global	jinja_lc b59d179defbc9fd6e6f426569f8430592e1a6a1b
 %global jinja_sc %(c=%{jinja_lc}; echo ${c:0:7})
 
+%global ntf_lc f7acffdc05b5db893daa8201f3ff85945da50fcb 
+%global ntf_sc %(c=%{ntf_lc}; echo ${c:0:7})
+
 %global	muxtheme_lc 7c59902f64dcd7ea356e891274b21144d1ea5948
 %global muxtheme_sc %(c=%{muxtheme_lc}; echo ${c:0:7})
 
@@ -51,6 +54,7 @@ Source9:	https://github.com/roxma/nvim-yarp/archive/%{yarp_lc}/nvim-yarp-%{yarp_
 Source10:	https://github.com/roxma/vim-hug-neovim-rpc/archive/%{hug_lc}/vim-hug-neovim-rpc-%{hug_sc}.tar.gz
 Source11:	https://github.com/deoplete-plugins/deoplete-jedi/archive/%{deojedi_lc}/deoplete-jedi-%{deojedi_sc}.tar.gz
 Source12:	https://github.com/ervandew/supertab/archive/%{supertab_lc}/supertab-%{supertab_sc}.tar.gz
+Source13: 	https://github.com/low-ghost/nerdtree-fugitive/archive/%{ntf_lc}/nerdtree-fugitive-%{ntf_sc}.tar.gz
 
 Requires:	ctags
 Requires:	git

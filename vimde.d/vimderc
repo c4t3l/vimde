@@ -31,7 +31,6 @@ filetype plugin indent on
 let g:python3_host_prog='/usr/bin/python3'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 0
-let yarp = true
 
 " Rulers, colors, etc.
 set number

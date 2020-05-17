@@ -43,6 +43,9 @@
 %global yarp_lc b710bf4daccb603a423754794fb446e5fbb59576
 %global yarp_sc %(c=%{yarp_lc}; echo ${c:0:7})
 
+%global vas_version 0.1.7
+%global deo_version 5.2
+
 
 Name:           vimde
 Version:        2020.4.0
@@ -60,8 +63,8 @@ Source3:	https://github.com/Glench/Vim-Jinja2-Syntax/archive/%{jinja_lc}/Vim-Jin
 Source4:	https://github.com/benmills/vimux/archive/%{vimux_lc}/vimux-%{vimux_sc}.tar.gz
 Source5:	https://github.com/jimeh/tmux-themepack/archive/%{muxtheme_lc}/tmux-themepack-%{muxtheme_sc}.tar.gz
 Source6: 	https://github.com/flazz/vim-colorschemes/archive/%{vimcolor_lc}/vim-colorschemes-%{vimcolor_sc}.tar.gz
-Source7:	https://github.com/vim-scripts/vim-auto-save/archive/0.1.7.tar.gz
-Source8:	https://github.com/Shougo/deoplete.nvim/archive/5.2.tar.gz
+Source7:	https://github.com/vim-scripts/vim-auto-save/archive/%{vas_version}.tar.gz
+Source8:	https://github.com/Shougo/deoplete.nvim/archive/%{deo_version}.tar.gz
 Source9:	https://github.com/roxma/nvim-yarp/archive/%{yarp_lc}/nvim-yarp-%{yarp_sc}.tar.gz
 Source10:	https://github.com/roxma/vim-hug-neovim-rpc/archive/%{hug_lc}/vim-hug-neovim-rpc-%{hug_sc}.tar.gz
 Source11:	https://github.com/deoplete-plugins/deoplete-jedi/archive/%{deojedi_lc}/deoplete-jedi-%{deojedi_sc}.tar.gz
@@ -106,8 +109,8 @@ file.
 %autosetup -D -b 4 -n vimux-%{vimux_lc}
 %autosetup -D -b 5 -n tmux-themepack-%{muxtheme_lc}
 %autosetup -D -b 6 -n vim-colorschemes-%{vimcolor_lc}
-%autosetup -D -b 7 -n vim-auto-save-0.1.7
-%autosetup -D -b 8 -n deoplete.nvim-5.2
+%autosetup -D -b 7 -n vim-auto-save-%{vas_version}
+%autosetup -D -b 8 -n deoplete.nvim-%{deo_version}
 %autosetup -D -b 9 -n nvim-yarp-%{yarp_lc}
 %autosetup -D -b 10 -n vim-hug-neovim-rpc-%{hug_lc}
 %autosetup -D -b 11 -n deoplete-jedi-%{deojedi_lc}
@@ -119,10 +122,37 @@ file.
 
 
 %install
-echo "pass"
+mkdir -vp %{buildroot}%{_prefix}/bin
+mkdir -vp %{buildroot}%{_sysconfdir}
+mkdir -vp %{buildroot}%{_datarootdir}/doc
+mkdir -vp %{buildroot}%{_datarootdir}/%{name}/bundle
+
+install -m 0755 %{_builddir}/%{name}-%{vimde_lc}/%{name} %{buildroot}%{_prefix}/bin/%{name}
+install -m 0644 %{_builddir}/%{name}-%{vimde_lc}/%{name}.d/vimderc %{buildroot}%{_sysconfdir}/vimderc
+install -m 0644 %{_builddir}/%{name}-%{vimde_lc}/%{name}.d/tmuxderc %{buildroot}%{_sysconfdir}/tmuxderc
+cp -r %{_builddir}/Vundle.vim-%{vundle_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vundle.vim-%{vundle_lc}
+cp -r %{_builddir}/salt-vim-%{salt_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/salt-vim-%{salt_lc}
+cp -r %{_builddir}/Vim-Jinja2-Syntax-%{jinja_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vim-Jinja2-Syntax-%{jinja_lc}
+cp -r %{_builddir}/vimux-%{vimux_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vimux-%{vimux_lc}
+cp -r %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/tmux-themepack-%{muxtheme_lc}
+cp -r %{_builddir}/vim-colorschemes-%{vimcolor_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-colorschemes-%{vimcolor_lc}
+cp -r %{_builddir}/vim-auto-save-%{vas_version} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-auto-save-%{vas_version}
+cp -r %{_builddir}/deoplete.nvim-%{deo_version} %{buildroot}%{_datarootdir}/%{name}/bundle/deoplete.nvim-%{deo_version}
+cp -r %{_builddir}/nvim-yarp-%{yarp_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/nvim-yarp-%{yarp_lc}
+cp -r %{_builddir}/vim-hug-neovim-rpc-%{hug_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-hug-neovim-rpc-%{hug_lc}
+cp -r %{_builddir}/deoplete-jedi-%{deojedi_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/deoplete-jedi-%{deojedi_lc}
+cp -r %{_builddir}/supertab-%{supertab_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/supertab-%{supertab_lc}
+cp -r %{_builddir}/nerdtree-fugitive-%{ntf_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/nerdtree-fugitive-%{ntf_lc}
+cp -r %{_builddir}/vim-tmux-navigator-%{vtnav_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-tmux-navigator-%{vtnav_lc}
+cp -r %{_builddir}/vim-pandoc-%{vp_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-pandoc-%{vp_lc}
+cp -r %{_builddir}/vim-pandoc-syntax-%{vps_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-pandoc-syntax-%{vps_lc}
 
 %files
-%doc add-docs-here
+%defattr(0644,root,root,0755)
+%{_datarootdir}/%{name}/bundle/
+%{_prefix}/bin/%{name}
+%config %{_sysconfdir}/vimderc
+%config %{_sysconfdir}/tmuxderc
 
 
 

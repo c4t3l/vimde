@@ -22,6 +22,12 @@
 %global vimcolor_lc 9e7ab1cfec5d3db85aa1c4e87329fd869ecf94e9
 %global vimcolor_sc %(c=%{vimcolor_lc}; echo ${c:0:7})
 
+%global vp_lc e49f9e7e3fc041dab0e9a1de4b564b3ddd8f77aa
+%global vp_sc %(c=%{vp_lc}; echo ${c:0:7})
+
+%global vps_lc 0d1129e5cf1b0e3a90e923c3b5f40133bf153f7c
+%global vps_sc %(c=%{vps_lc}; echo ${c:0:7})
+
 %global	vimux_lc 37f41195e6369ac602a08ec61364906600b771f1
 %global vimux_sc %(c=%{vimux_lc}; echo ${c:0:7})
 
@@ -59,6 +65,8 @@ Source11:	https://github.com/deoplete-plugins/deoplete-jedi/archive/%{deojedi_lc
 Source12:	https://github.com/ervandew/supertab/archive/%{supertab_lc}/supertab-%{supertab_sc}.tar.gz
 Source13: 	https://github.com/low-ghost/nerdtree-fugitive/archive/%{ntf_lc}/nerdtree-fugitive-%{ntf_sc}.tar.gz
 Source14: 	https://github.com/christoomey/vim-tmux-navigator/archive/%{vtnav_lc}/vim-tmux-navigator-%{vtnav_sc}.tar.gz
+Source15: 	https://github.com/vim-pandoc/vim-pandoc/archive/%{vp_lc}/vim-pandoc-%{vp_sc}.tar.gz
+Source16: 	https://github.com/vim-pandoc/vim-pandoc-syntax/archive/%{vps_lc}/vim-pandoc-syntax-%{vps_sc}.tar.gz
 
 
 Requires:	ctags

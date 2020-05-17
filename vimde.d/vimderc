@@ -21,6 +21,10 @@ Plugin 'vimux-37f41195e6369ac602a08ec61364906600b771f1', {'pinned': 1}
 Plugin 'Vundle.vim-b255382d6242d7ea3877bf059d2934125e0c4d95', {'pinned': 1}
 Plugin 'supertab-40fe711e088e2ab346738233dd5adbb1be355172', {'pinned': 1}
 Plugin 'vim-tmux-navigator-44ba6fbe45895cd541ebfc87606add5c76e3829b', {'pinned': 1}
+Plugin 'vim-pandoc-e49f9e7e3fc041dab0e9a1de4b564b3ddd8f77aa', {'pinned': 1}
+Plugin 'vim-pandoc-syntax-0d1129e5cf1b0e3a90e923c3b5f40133bf153f7c', {'pinned': 1}
+
+
 
 call vundle#end()
 
@@ -34,7 +38,8 @@ let g:deoplete#sources#jedi#enable_typeinfo = 0
 
 " Rulers, colors, etc.
 set number
-color Monokai
+set relativenumber
+color gruvbox
 set backspace="indent,eol,start"
 
 " Set leader mapping to spacebar

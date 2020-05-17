@@ -28,6 +28,9 @@
 %global vps_lc 0d1129e5cf1b0e3a90e923c3b5f40133bf153f7c
 %global vps_sc %(c=%{vps_lc}; echo ${c:0:7})
 
+%global vimde_lc 96d889bf7e39adf596fb12c1e039fa6dc3b87fa0
+%global vimde_sc %(c=%{vimde_lc}; echo ${c:0:7})
+
 %global	vimux_lc 37f41195e6369ac602a08ec61364906600b771f1
 %global vimux_sc %(c=%{vimux_lc}; echo ${c:0:7})
 
@@ -50,7 +53,7 @@ Summary:        Simple Development Environment based on Vim and tmux
 License:        Apache 2.0
 URL:            https://git.eogresources.com/eog/pkg-vimde
 
-Source0:        https://git.eogresources.com/eog/pkg-vimde
+Source0:        https://github.com/c4t3l/vimde/archive/%{vimde_lc}/vimde-%{vimde_sc}.tar.gz
 Source1:	https://github.com/VundleVim/Vundle.vim/archive/%{vundle_lc}/Vundle.vim-%{vundle_sc}.tar.gz
 Source2:	https://github.com/saltstack/salt-vim/archive/%{salt_lc}/salt_vim-%{salt_sc}.tar.gz
 Source3:	https://github.com/Glench/Vim-Jinja2-Syntax/archive/%{jinja_lc}/Vim-Jinja2-Syntax-%{jinja_sc}.tar.gz

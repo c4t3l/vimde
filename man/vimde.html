@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="vimde Authors" />
+  <title>vimde(1)</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">vimde(1)</h1>
+<p class="author">vimde Authors</p>
+<p class="date">2020-</p>
+</header>
+<h1 id="name">NAME</h1>
+<p>vimde - Simple Development Environment based on Vim and Tmux</p>
+<h1 id="synopsis">SYNOPSIS</h1>
+<p><code>vimde [options]</code></p>
+<h1 id="description">DESCRIPTION</h1>
+<p><code>vimde</code> is an IDE tool for writing programs and running tests. It is a wrapper around vim and tmux with a carefully curated list of default plugins.</p>
+<h2 id="command-line-options">Command Line Options</h2>
+<p>The following command line parameters are understood.</p>
+<dl>
+<dt><code>--init</code>, <code>-i</code></dt>
+<dd>Initialize the environment. This effectively creates local user directories for plugins and generates default files. This command must be ran first before starting <code>vimde</code>.
+</dd>
+<dt><code>--update-plugins</code>, <code>-u</code></dt>
+<dd>Updates plugins for <code>vimde</code>. This is useful if you add additional plugins to <code>.vimderc</code>.
+</dd>
+<dt><code>--start</code>, <code>-s</code></dt>
+<dd>Starts vimde. This is the default option if none is given.
+</dd>
+</dl>
+<h1 id="on-line-help">ON-LINE HELP</h1>
+<p>Type “:help vimde” in <code>vimde</code> to get started.</p>
+<h1 id="files">FILES</h1>
+<dl>
+<dt><code>/usr/share/vimde/bundle/*</code></dt>
+<dd>Contains all of the default plugins and syntax highlighers for <code>vimde</code>.
+</dd>
+<dt><code>/usr/share/tmuxde/plugins/tmux-themepack*</code></dt>
+<dd>Contains themepacks for tmux-powerline.
+</dd>
+<dt><code>/etc/vimderc</code></dt>
+<dd>System-wide <code>vimde-vim</code> initializations.
+</dd>
+<dt><code>/etc/tmuxderc</code></dt>
+<dd>System-wide <code>vimde-tmux</code> initializations.
+</dd>
+<dt><code>~/.vimderc</code></dt>
+<dd>Your personal <code>vimde-vim</code> customizations.
+</dd>
+<dt><code>~/.tmuxderc</code></dt>
+<dd>Your personal <code>vimde-tmux</code> customizations.
+</dd>
+</dl>
+</body>
+</html>

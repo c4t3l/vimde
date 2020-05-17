@@ -51,9 +51,9 @@ Summary:        Simple Development Environment based on Vim and tmux
 
 
 License:        Apache 2.0
-URL:            https://git.eogresources.com/eog/pkg-vimde
+URL:            https://github.com/c4t3l/vimde
 
-Source0:        https://github.com/c4t3l/vimde/archive/%{vimde_lc}/vimde-%{vimde_sc}.tar.gz
+Source0:        https://github.com/c4t3l/%{name}/archive/%{vimde_lc}/%{name}-%{vimde_sc}.tar.gz
 Source1:	https://github.com/VundleVim/Vundle.vim/archive/%{vundle_lc}/Vundle.vim-%{vundle_sc}.tar.gz
 Source2:	https://github.com/saltstack/salt-vim/archive/%{salt_lc}/salt_vim-%{salt_sc}.tar.gz
 Source3:	https://github.com/Glench/Vim-Jinja2-Syntax/archive/%{jinja_lc}/Vim-Jinja2-Syntax-%{jinja_sc}.tar.gz
@@ -97,13 +97,29 @@ VimDE can easily be extended by adding new plugins and editing your local .vimde
 file.  
 
 
-%prep
-%autosetup
 # We simply need to untar the sources and copy them to /usr/share/vimde/bundle
+%prep
+%autosetup -n %{name}-%{vimde_lc}
+%autosetup -D -b 1 -n Vundle.vim-%{vundle_lc}
+%autosetup -D -b 2 -n salt-vim-%{salt_lc}
+%autosetup -D -b 3 -n Vim-Jinja2-Syntax-%{jinja_lc}
+%autosetup -D -b 4 -n vimux-%{vimux_lc}
+%autosetup -D -b 5 -n tmux-themepack-%{muxtheme_lc}
+%autosetup -D -b 6 -n vim-colorschemes-%{vimcolor_lc}
+%autosetup -D -b 7 -n vim-auto-save-0.1.7
+%autosetup -D -b 8 -n deoplete.nvim-5.2
+%autosetup -D -b 9 -n nvim-yarp-%{yarp_lc}
+%autosetup -D -b 10 -n vim-hug-neovim-rpc-%{hug_lc}
+%autosetup -D -b 11 -n deoplete-jedi-%{deojedi_lc}
+%autosetup -D -b 12 -n supertab-%{supertab_lc}
+%autosetup -D -b 13 -n nerdtree-fugitive-%{ntf_lc}
+%autosetup -D -b 14 -n vim-tmux-navigator-%{vtnav_lc}
+%autosetup -D -b 15 -n vim-pandoc-%{vp_lc}
+%autosetup -D -b 16 -n vim-pandoc-syntax-%{vps_lc}
 
 
 %install
-
+echo "pass"
 
 %files
 %doc add-docs-here

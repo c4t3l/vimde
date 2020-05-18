@@ -46,6 +46,8 @@
 %global vas_version 0.1.7
 %global deo_version 5.2
 
+%undefine __brp_python_bytecompile
+%undefine __brp_mangle_shebangs
 
 Name:           vimde
 Version:        2020.4.0

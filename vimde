@@ -47,7 +47,6 @@ def init_environment():
                                     'Please restart VimDE.\n')
 
 
-
 def copy_configs():
     """
     Copy system config files to the user home directory

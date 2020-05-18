@@ -83,6 +83,7 @@ Requires:	python3 >= 3.8
 Requires:	python3-msgpack
 Requires:	python3-neovim
 Requires:	python3-pudb
+Requires:	python3-setproctitle
 Requires:	tmux >= 2.9
 Requires:	tmux-powerline
 Requires:	vim-enhanced >= 8.0

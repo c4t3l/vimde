@@ -128,7 +128,7 @@ mkdir -vp %{buildroot}%{_prefix}/bin
 mkdir -vp %{buildroot}%{_sysconfdir}
 mkdir -vp %{buildroot}%{_datarootdir}/doc
 mkdir -vp %{buildroot}%{_datarootdir}/%{name}/bundle
-mkdir -vp %{buildroot}%(_datarootdir}/tmuxde/plugins 
+mkdir -vp %{buildroot}%{_datarootdir}/tmuxde/plugins 
 
 install -m 0755 %{_builddir}/%{name}-%{vimde_lc}/%{name} %{buildroot}%{_prefix}/bin/%{name}
 install -m 0644 %{_builddir}/%{name}-%{vimde_lc}/%{name}.d/vimderc %{buildroot}%{_sysconfdir}/vimderc

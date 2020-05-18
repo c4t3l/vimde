@@ -128,6 +128,7 @@ mkdir -vp %{buildroot}%{_prefix}/bin
 mkdir -vp %{buildroot}%{_sysconfdir}
 mkdir -vp %{buildroot}%{_datarootdir}/doc
 mkdir -vp %{buildroot}%{_datarootdir}/%{name}/bundle
+mkdir -vp %{buildroot}%(_datarootdir}/tmuxde/plugins 
 
 install -m 0755 %{_builddir}/%{name}-%{vimde_lc}/%{name} %{buildroot}%{_prefix}/bin/%{name}
 install -m 0644 %{_builddir}/%{name}-%{vimde_lc}/%{name}.d/vimderc %{buildroot}%{_sysconfdir}/vimderc
@@ -136,7 +137,6 @@ cp -r %{_builddir}/Vundle.vim-%{vundle_lc} %{buildroot}%{_datarootdir}/%{name}/b
 cp -r %{_builddir}/salt-vim-%{salt_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/salt-vim-%{salt_lc}
 cp -r %{_builddir}/Vim-Jinja2-Syntax-%{jinja_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vim-Jinja2-Syntax-%{jinja_lc}
 cp -r %{_builddir}/vimux-%{vimux_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vimux-%{vimux_lc}
-cp -r %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/tmux-themepack-%{muxtheme_lc}
 cp -r %{_builddir}/vim-colorschemes-%{vimcolor_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-colorschemes-%{vimcolor_lc}
 cp -r %{_builddir}/vim-auto-save-%{vas_version} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-auto-save-%{vas_version}
 cp -r %{_builddir}/deoplete.nvim-%{deo_version} %{buildroot}%{_datarootdir}/%{name}/bundle/deoplete.nvim-%{deo_version}
@@ -148,14 +148,15 @@ cp -r %{_builddir}/nerdtree-fugitive-%{ntf_lc} %{buildroot}%{_datarootdir}/%{nam
 cp -r %{_builddir}/vim-tmux-navigator-%{vtnav_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-tmux-navigator-%{vtnav_lc}
 cp -r %{_builddir}/vim-pandoc-%{vp_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-pandoc-%{vp_lc}
 cp -r %{_builddir}/vim-pandoc-syntax-%{vps_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-pandoc-syntax-%{vps_lc}
+cp -r %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tmuxde/plugins/tmux-themepack-%{muxtheme_lc}
 
 %files
-%defattr(0644,root,root,0755)
-%{_datarootdir}/%{name}/bundle/
+%defattr(-,root,root,0755)
+%{_datarootdir}/%{name}/
+%{_datarootdir}/tmuxde/
 %{_prefix}/bin/%{name}
 %config %{_sysconfdir}/vimderc
 %config %{_sysconfdir}/tmuxderc
-
 
 
 %changelog

@@ -219,7 +219,7 @@ def parse_cli():
     """
 
     my_parser = argparse.ArgumentParser(description='VimDE is a lightweight ' \
-                                                    'vim based IDE.')
+                                                    'vim+tmux based IDE.')
     my_parser._check_conflict
     my_parser.add_argument('-i', '--init', action='store_true',
                            help='Initialize VimDE for use.')

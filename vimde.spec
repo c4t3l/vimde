@@ -50,7 +50,7 @@
 %undefine __brp_mangle_shebangs
 
 Name:           vimde
-Version:        2020.4.0
+Version:        2020.5.0
 Release:        1.eog%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
 
@@ -79,18 +79,19 @@ Source16: 	https://github.com/vim-pandoc/vim-pandoc-syntax/archive/%{vps_lc}/vim
 
 Requires:	ctags
 Requires:	git
-Requires:	python3 >= 3.8
+Requires: 	pandoc
+Requires:	python3 >= 3.6
 Requires:	python3-msgpack
 Requires:	python3-neovim
 Requires:	python3-pudb
 Requires:	python3-setproctitle
+Requires: 	python3-jedi
+Requires: 	surf
 Requires:	tmux >= 2.9
 Requires:	tmux-powerline
 Requires:	vim-enhanced >= 8.0
 Requires:	vim-nerdtree
 Requires:	vim-powerline
-Requires: 	pandoc
-Requires: 	surf
 Requires: 	vim-fugitive
 Requires: 	vim-syntastic-python
 Requires: 	vim-syntastic-yaml
@@ -161,5 +162,5 @@ cp -r %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tmu
 
 
 %changelog
-* Sat Apr 18 2020 Robby Callicotte <rcallicotte@gmail.com> - 2020.4.0-1.eog
+* Wed May 20 2020 Robby Callicotte <rcallicotte@gmail.com> - 2020.5.0-1.eog
 - Initial build

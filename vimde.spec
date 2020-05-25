@@ -28,7 +28,7 @@
 %global vps_lc 0d1129e5cf1b0e3a90e923c3b5f40133bf153f7c
 %global vps_sc %(c=%{vps_lc}; echo ${c:0:7})
 
-%global vimde_lc 6b93e8912ceff3bc56d25f39969ef6d4f71a10c2
+%global vimde_lc 1e38cce13a7381829367ad9990cb718d00da8fba 
 %global vimde_sc %(c=%{vimde_lc}; echo ${c:0:7})
 
 %global	vimux_lc 37f41195e6369ac602a08ec61364906600b771f1

@@ -51,7 +51,7 @@
 
 Name:           vimde
 Version:        2020.5.0
-Release:        1.eog%{?dist}
+Release:        2.eog%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
 
 
@@ -95,6 +95,8 @@ Requires:	vim-powerline
 Requires: 	vim-fugitive
 Requires: 	vim-syntastic-python
 Requires: 	vim-syntastic-yaml
+Requires: 	vim-syntastic-sh
+Requires: 	vim-syntastic-spec
 Requires: 	wemux
 
 
@@ -162,5 +164,8 @@ cp -r %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tmu
 
 
 %changelog
+* Thu May 28 2020 Robby Callicotte <robby_callicotte@eogresources.com> - 2020.5.0-2.eog
+- Added shell and spec linters to package
+
 * Wed May 20 2020 Robby Callicotte <rcallicotte@gmail.com> - 2020.5.0-1.eog
 - Initial build

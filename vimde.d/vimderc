@@ -6,23 +6,23 @@ filetype off
 " Vundle initialize
 " If you choose to update vundle on your own, incomment the following line.
 "set rtp+=~/.vimde/bundle/Vundle.vim
-set rtp+=/usr/share/vimde/bundle/Vundle.vim-b255382d6242d7ea3877bf059d2934125e0c4d95
+set rtp+=/usr/share/vimde/bundle/Vundle.vim
 call vundle#begin('~/.vimde/bundle')
 
-Plugin 'deoplete-jedi-42f4c24a951b0fb5e76a70e5234f16193a8a746d', {'pinned': 1}
-Plugin 'deoplete.nvim-5.2', {'pinned': 1}
-Plugin 'nvim-yarp-b710bf4daccb603a423754794fb446e5fbb59576', {'pinned': 1}
-Plugin 'salt-vim-6ca9e3500cc39dd417b411435d58a1b720b331cc', {'pinned': 1}
-Plugin 'vim-auto-save-0.1.7', {'pinned': 1}
-Plugin 'vim-colorschemes-9e7ab1cfec5d3db85aa1c4e87329fd869ecf94e9', {'pinned': 1}
-Plugin 'vim-hug-neovim-rpc-86e82de95e2a318589b718fef22eaeca1a3e3e04', {'pinned': 1}
-Plugin 'Vim-Jinja2-Syntax-b59d179defbc9fd6e6f426569f8430592e1a6a1b', {'pinned': 1}
-Plugin 'vimux-37f41195e6369ac602a08ec61364906600b771f1', {'pinned': 1}
-Plugin 'Vundle.vim-b255382d6242d7ea3877bf059d2934125e0c4d95', {'pinned': 1}
-Plugin 'supertab-40fe711e088e2ab346738233dd5adbb1be355172', {'pinned': 1}
-Plugin 'vim-tmux-navigator-44ba6fbe45895cd541ebfc87606add5c76e3829b', {'pinned': 1}
-Plugin 'vim-pandoc-e49f9e7e3fc041dab0e9a1de4b564b3ddd8f77aa', {'pinned': 1}
-Plugin 'vim-pandoc-syntax-0d1129e5cf1b0e3a90e923c3b5f40133bf153f7c', {'pinned': 1}
+Plugin 'deoplete-jedi', {'pinned': 1}
+Plugin 'deoplete.nvim', {'pinned': 1}
+Plugin 'nvim-yarp', {'pinned': 1}
+Plugin 'salt-vim', {'pinned': 1}
+Plugin 'vim-auto-save', {'pinned': 1}
+Plugin 'vim-colorschemes', {'pinned': 1}
+Plugin 'vim-hug-neovim-rpc', {'pinned': 1}
+Plugin 'Vim-Jinja2-Syntax', {'pinned': 1}
+Plugin 'vimux', {'pinned': 1}
+Plugin 'Vundle.vim', {'pinned': 1}
+Plugin 'supertab', {'pinned': 1}
+Plugin 'vim-tmux-navigator', {'pinned': 1}
+Plugin 'vim-pandoc', {'pinned': 1}
+Plugin 'vim-pandoc-syntax', {'pinned': 1}
 
 
 
@@ -35,6 +35,17 @@ filetype plugin indent on
 let g:python3_host_prog='/usr/bin/python3'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#enable_typeinfo = 0
+
+" Ale linter setup
+let g:ale_linter_aliases = {
+\       'sls': 'salt'
+\}
+
+let g:ale_linters = {
+\       'python': ['pylint'],
+\       'salt': ['salt-lint'],
+\       'spec': ['rpmlint'],
+\}
 
 " Rulers, colors, etc.
 set number
@@ -83,13 +94,16 @@ nnoremap <leader>tq :call VimuxCloseRunner()<CR>
 nnoremap <leader>tl :call VimuxRunLastCommand()<CR> 
 nnoremap <leader>ts :call VimuxInterruptRunner()<CR>
 nnoremap <leader>tc :call VimuxClearRunnerHistory()<CR>
+nnoremap <leader>tz :call VimuxZoomRunner()<CR>
 
 " RPM bindings
 nnoremap <leader>m :call VimuxRunCommand("spectool -g -R *.spec")<CR> 
 nnoremap <leader>bs :call VimuxRunCommand("rpmbuild -bs *.spec")<CR> 
+nnoremap <leader>bp :call VimuxPromptCommand("rpmdev-bumpspec *.spec")<CR>
+nnoremap <leader>rm :call VimuxRunCommand("rm -Rf ~/rpmbuild/SOURCES/*")<CR>
 
 " Python interpreter bindings
-nnoremap <leader>py :call VimuxRunCommand("python")<CR>
+nnoremap <leader>py :call VimuxRunCommand("bpython")<CR>
 
 " Force vim split navigation to better match tmux
 nnoremap <C-J> <C-W><C-J>

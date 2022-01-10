@@ -8,7 +8,3 @@ TO DO LIST
 * ~~Fix `tmuxderc` to use `source` argument rather than depend on `tpm`~~
 
 * Write remaining documentation
-
-* Add documentation to spec file.
-
-* Finish packaging rpm.

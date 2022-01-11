@@ -16,7 +16,7 @@ import subprocess
 import sys
 import setproctitle
 
-__version__ = '2022.01.00'
+__version__ = '2022.1.0'
 
 if sys.version_info < (3, 6):
     die('Sorry, vimde needs at least Python 3.6')

@@ -1,10 +1,9 @@
-pkg-vimde
-=========
+# VimDE
 
-VimDE is a simple Development Environment wrapper for vim and tmux.  It requires vim8 and python3.8.  
-Here is a list of included plugins that come "out-of-the-box".
+VimDE is a simple Development Environment wrapper for vim and tmux.  It requires at least 
+vim8 and python3.8. Here is a list of included plugins that come "out-of-the-box".  
 
-* NERDTree
+* NERDTree  
 
 * Deoplete-Jedi (for python autocompletion)
 
@@ -23,3 +22,14 @@ Here is a list of included plugins that come "out-of-the-box".
 * Powerline plugins for Vim and Tmux
 
 * Wemux server for use with pair programming
+
+## Local Development  
+
+```
+python -m venv .vimde-dev
+source .vimde-dev/bin/activate
+pip install --upgrade pip
+pip install -q build
+make dist install
+make install
+```

@@ -1,2 +1,10 @@
+.vimde-dev/
+vimde.egg-info/
+dist/
 **.swp
+**/__pycache__
+**.tar.gz
+results_*/
+**.src.rpm
+**.rpm
 

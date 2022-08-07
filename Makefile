@@ -1,8 +1,8 @@
-file=VERSION
-NEW_VERSION=$(shell cat ${file})
+dist: 
+	python -m build
 
-version:
-	sed -i "s/VERSION/${NEW_VERSION}/" vimde
-	sed -i "s/VERSION/${NEW_VERSION}/" doc/vimde.1
-	sed -i "s/VERSION/${NEW_VERSION}/" doc/vimde.md
+clean:
+	rm -rf dist
 
+install:
+	pip install --force-reinstall dist/vimde*.whl

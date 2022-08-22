@@ -1,25 +1,34 @@
-#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 
-'''
-VimDE wrapper for python.  This wrapper script simply calls specially
-configured versions of tmux and vim for use as an IDE for Saltstack,
-RPM, or python development.  It can, of course, be extended any
-number of ways.
-'''
+"""
+Vimde utilities module.
+"""
 
-import argparse
-import getpass
 import pathlib
+import sys
 import shlex
 import shutil
 import subprocess
-import sys
 import setproctitle
 
-__version__ = '2022.1.0'
 
-if sys.version_info < (3, 6):
-    die('Sorry, vimde needs at least Python 3.6')
+def _lockfile(create=False):
+    """
+    Check if lockfile exists. If "create=True" is passed, then create the lockfile.
+    """
+    lock = pathlib.Path.home().joinpath('.vimde/LockFile')
+
+    if create:
+        pathlib.Path.touch(lock)
+    return lock.exists()
+
+
+def die(msg):
+    """
+    Kills execution of the program.  Also prints a nice message for the user.
+    """
+    sys.stderr.write(msg + '\n')
+    sys.exit(1)
 
 
 def init_environment():
@@ -28,10 +37,8 @@ def init_environment():
     This function is destructive to user vimderc and tmuxderc if LockFile
     does not exist.
     """
-
     vimde_dir = pathlib.Path.home().joinpath('.vimde')
     tmuxde_dir = pathlib.Path.home().joinpath('.tmuxde')
-
     vimde_dir.mkdir(exist_ok=True)
     tmuxde_dir.mkdir(exist_ok=True)
 
@@ -43,28 +50,23 @@ def init_environment():
         _lockfile(create=True)
         copy_plugins()
         install_plugins()
-        return sys.stderr.write('[INFO] VimDE environment initialized. ' \
-                                    'Please restart VimDE.\n')
+        sys.stderr.write('[INFO] VimDE environment initialized. ' \
+                         'Please restart VimDE.\n')
 
 
 def copy_configs():
     """
     Copy system config files to the user home directory
     """
-
     global_vimderc = get_config('vimderc', system=True)
     global_tmuxderc = get_config('tmuxderc', system=True)
-
     local_vimderc = get_config('vimderc', local=True)
     local_tmuxderc = get_config('tmuxderc', local=True)
-
     shutil.copy(global_vimderc, local_vimderc)
     shutil.copy(global_tmuxderc, local_tmuxderc)
 
-    if pathlib.Path.exists(local_vimderc) and pathlib.Path.exists(local_tmuxderc):
-        return True
-
-    else:
+    if not (pathlib.Path.exists(local_vimderc)
+            and pathlib.Path.exists(local_tmuxderc)):
         die('[ERROR] Configuration file copy failed. ' \
             'Please rerun "vimde --init".')
 
@@ -81,7 +83,6 @@ def copy_plugins():
 
     shutil.rmtree(user_vim_plugins_path, ignore_errors=True)
     shutil.rmtree(user_tmux_plugins_path, ignore_errors=True)
-
     vim_copy = shutil.copytree(system_vim_plugins_path, user_vim_plugins_path)
     tmux_copy = shutil.copytree(system_tmux_plugins_path, user_tmux_plugins_path)
     return vim_copy, tmux_copy
@@ -94,43 +95,17 @@ def install_plugins(update=False):
 
     vim +PluginInstall +qall
     """
-
     if update:
         if not _lockfile():
             die('[ERROR] VimDE is not initialized.  Please run "vimde --init" ' \
                 'to initialize your environment.\n')
-
         cmd = f'vim -u  {str(get_config("vimderc"))} +PluginUpdate +qall'
-        my_msg = '[INFO] Updating Plugins...\n'
 
     else:
         cmd = f'vim -u {str(get_config("vimderc"))} +PluginInstall +qall'
-        my_msg = '[INFO] Installing Plugins...\n'
 
     cmd = shlex.split(cmd)
     return _run(cmd)
-
-
-def _lockfile(create=False):
-    """
-    Check if lockfile exists. If "create=True" is passed, then create the lockfile.
-    """
-
-    lock = pathlib.Path.home().joinpath('.vimde/LockFile')
-
-    if create:
-        pathlib.Path.touch(lock)
-
-    return lock.exists()
-
-
-def die(msg):
-    """
-    Kills execution of the program.  Also prints a nice message for the user.
-    """
-
-    sys.stderr.write(msg + '\n')
-    sys.exit(1)
 
 
 def get_config(app, local=False, system=False):
@@ -149,20 +124,18 @@ def get_config(app, local=False, system=False):
 
     if local:
         return app_local.absolute()
-            
-    elif system:
+
+    if system:
         return app_global.absolute()
 
-    else:
-        if app_local.exists():
-            return app_local.absolute()
+    if app_local.exists():
+        return app_local.absolute()
 
-        else:
-            return app_global.absolute()
+    return app_global.absolute()
 
 
 def set_title():
-    # Set the process title for ps output
+    """Set the process title for ps output"""
     setproctitle.setproctitle('vimde')
 
 
@@ -173,12 +146,11 @@ def _run(*args):
 
     # Basic arg validation
     my_args = args[0]
-    if isinstance(my_args, list):
-        return subprocess.run(my_args)
-
-    else:
+    if not isinstance(my_args, list):
         sys.stderr.write(f'dumping args: {my_args}\n')
-        die('[ERROR] passed badly formatted list to _run.')
+        return die('[ERROR] passed badly formatted list to _run.')
+
+    return subprocess.run(my_args, check=True)
 
 
 def start_vimde():
@@ -192,57 +164,5 @@ def start_vimde():
         cmd = shlex.split(cmd)
         return _run(cmd)
 
-    else:
-        die('[ERROR] VimDE is not initialized.  Please run "vimde --init" to ' \
-             'initialize your environment.\n')
-
-
-def read_cli():
-    """
-    Reads the arguments passed via cli and calls appropriate functions.
-    """
-
-    my_call = parse_cli()
-
-    if my_call.init:
-        return init_environment()
-
-    elif my_call.update_plugins:
-        return install_plugins(update=True)
-
-    elif my_call.start:
-        return start_vimde()
-
-    else:
-        return start_vimde()
-
-
-def parse_cli():
-    """
-    Parses cli for arguments and stores the variables.
-    """
-
-    my_parser = argparse.ArgumentParser(description='VimDE is a lightweight ' \
-                                                    'vim+tmux based IDE.')
-    my_parser._check_conflict
-    my_parser.add_argument('-i', '--init', action='store_true',
-                           help='Initialize VimDE for use.')
-    my_parser.add_argument('-u', '--update-plugins', action='store_true', 
-                           help='Update plugin set.')
-    my_parser.add_argument('-s', '--start', action='store_false',
-                           help='Start VimDE.  This is the default behavior.')
-
-    args = my_parser.parse_args()
-    return args
-    
-
-def main():
-    set_title()
-    read_cli()
-
-    return sys.stderr.write(f'Bye bye. See you later {getpass.getuser()}!!\n')
-
-    
-if __name__ == '__main__':
-    main()
-
+    return die('[ERROR] VimDE is not initialized.  Please run "vimde --init" to ' \
+               'initialize your environment.\n')

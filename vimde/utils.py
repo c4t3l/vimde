@@ -10,6 +10,7 @@ import shlex
 import shutil
 import subprocess
 import setproctitle
+from click import secho
 
 
 def _lockfile(create=False):
@@ -23,11 +24,11 @@ def _lockfile(create=False):
     return lock.exists()
 
 
-def die(msg):
+def die(msg, color=None):
     """
     Kills execution of the program.  Also prints a nice message for the user.
     """
-    sys.stderr.write(msg + '\n')
+    secho(msg, fg=color)
     sys.exit(1)
 
 
@@ -44,14 +45,14 @@ def init_environment():
 
     if _lockfile():
         die('[WARNING] ~/.vimde/LockFile exists!!  Cowardly refusing to ' \
-            're-initialize environment.\n')
+            're-initialize environment.', color='red')
 
     if copy_configs():
         _lockfile(create=True)
         copy_plugins()
         install_plugins()
-        sys.stderr.write('[INFO] VimDE environment initialized. ' \
-                         'Please restart VimDE.\n')
+        secho('[INFO] VimDE environment initialized. Please restart VimDE.',
+                color='yellow')
 
 
 def copy_configs():
@@ -68,7 +69,7 @@ def copy_configs():
     if not (pathlib.Path.exists(local_vimderc)
             and pathlib.Path.exists(local_tmuxderc)):
         die('[ERROR] Configuration file copy failed. ' \
-            'Please rerun "vimde --init".')
+            'Please rerun "vimde --init".', color='red')
 
 
 def copy_plugins():
@@ -98,7 +99,7 @@ def install_plugins(update=False):
     if update:
         if not _lockfile():
             die('[ERROR] VimDE is not initialized.  Please run "vimde --init" ' \
-                'to initialize your environment.\n')
+                'to initialize your environment.', color='red')
         cmd = f'vim -u  {str(get_config("vimderc"))} +PluginUpdate +qall'
 
     else:
@@ -148,7 +149,7 @@ def _run(*args):
     my_args = args[0]
     if not isinstance(my_args, list):
         sys.stderr.write(f'dumping args: {my_args}\n')
-        return die('[ERROR] passed badly formatted list to _run.')
+        return die('[ERROR] passed badly formatted list to _run.', color='red')
 
     return subprocess.run(my_args, check=True)
 
@@ -165,4 +166,4 @@ def start_vimde():
         return _run(cmd)
 
     return die('[ERROR] VimDE is not initialized.  Please run "vimde --init" to ' \
-               'initialize your environment.\n')
+               'initialize your environment.', color='red')

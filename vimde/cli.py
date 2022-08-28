@@ -29,7 +29,7 @@ def main(init, update_plugins, start):
     if start:
         utils.start_vimde()
 
-    return click.secho(f"Bye bye. See you later {getpass.getuser()}!!", fg="blue")
+    return click.secho(f"Bye bye. See you later {getpass.getuser()}!!", fg="cyan")
 
 
 if "name" == "__main__":

@@ -96,11 +96,17 @@ nnoremap <leader>ts :call VimuxInterruptRunner()<CR>
 nnoremap <leader>tc :call VimuxClearRunnerHistory()<CR>
 nnoremap <leader>tz :call VimuxZoomRunner()<CR>
 
-" RPM bindings
-nnoremap <leader>m :call VimuxRunCommand("spectool -g -R *.spec")<CR> 
-nnoremap <leader>bs :call VimuxRunCommand("rpmbuild -bs *.spec")<CR> 
-nnoremap <leader>bp :call VimuxPromptCommand("rpmdev-bumpspec *.spec")<CR>
-nnoremap <leader>rm :call VimuxRunCommand("rm -Rf ~/rpmbuild/SOURCES/*")<CR>
+" RPM/Fedpkg bindings
+nnoremap <leader>dl :call VimuxRunCommand("spectool -g *.spec")<CR> 
+nnoremap <leader>fbuild :call VimuxRunCommand("fedpkg build")<CR>
+nnoremap <leader>fclean :call VimuxRunCommand("fedpkg clean")<CR>
+nnoremap <leader>fclone :call VimuxPromptCommand("fedpkg clone ")<CR>
+nnoremap <leader>fimport :call VimuxPromptCommand("fedpkg import ")<CR>
+nnoremap <leader>flint :call VimuxRunCommand("fedpkg lint")<CR> 
+nnoremap <leader>fmock :call VimuxRunCommand("fedpkg mockbuild")<CR> 
+nnoremap <leader>fscratch :call VimuxRunCommand("fedpkg scratch-build")<CR>
+nnoremap <leader>fsources :call VimuxRunCommand("fedpkg sources")<CR>
+nnoremap <leader>fsrpm :call VimuxRunCommand("fedpkg srpm")<CR>
 
 " Python interpreter bindings
 nnoremap <leader>py :call VimuxRunCommand("bpython")<CR>

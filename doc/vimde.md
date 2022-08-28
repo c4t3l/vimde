@@ -1,6 +1,6 @@
 % vimde(1) 
 % vimde Authors 
-% 2022.1.0
+% 2022.8.0
 
 # NAME
 

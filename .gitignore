@@ -1,4 +1,5 @@
 .vimde-dev/
+.venv/
 vimde.egg-info/
 dist/
 **.swp

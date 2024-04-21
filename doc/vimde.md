@@ -1,6 +1,6 @@
 % vimde(1) 
 % vimde Authors 
-% 2022.8.0
+% 2024.4.0
 
 # NAME
 
@@ -30,6 +30,10 @@ The following command line parameters are understood.
 
 `--start`, `-s`
 : Starts vimde.  This is the default option if none is given.
+
+`--debug`, `-d`
+: Starts vimde in debug mode.  This option prints runtime debug output to 
+  `.vimde/debug.log`.
 
 # ON-LINE HELP
 

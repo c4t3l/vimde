@@ -11,15 +11,19 @@ from vimde import utils
 
 
 @click.command()
+@click.option("-d", "--debug", is_flag=True, help="Start VimDE with debug logging")
 @click.option("-i", "--init", is_flag=True, help="Initialize VimDE")
 @click.option("-u", "--update_plugins", is_flag=True, help="Update plugins to newest versions")
 @click.option("-s", "--start", is_flag=True, default=True, help="Start VimDE. This is the default")
-def main(init, update_plugins, start):
+def main(debug, init, update_plugins, start):
     """
     VimDE is a lightweight vim+tmux based IDE. It is highly customizable and
     configurable.
     """
     utils.set_title()
+    if debug:
+        utils.start_vimde(debug=True)
+
     if init:
         utils.init_environment()
 

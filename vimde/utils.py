@@ -154,15 +154,22 @@ def _run(*args):
     return subprocess.run(my_args, check=True)
 
 
-def start_vimde():
+def start_vimde(debug=False):
+    #import pudb; pu.db
     """
     Handles startup of the application.
     """
 
     if _lockfile():
-        cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE ' \
-              f'vim -u {str(get_config("vimderc"))}'
-        cmd = shlex.split(cmd)
+        if debug:
+            cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE_DEBUG-MODE ' \
+                  f'vim -u {str(get_config("vimderc"))} -V9{pathlib.Path.home().joinpath(".vimde", "debug.log")}'
+            cmd = shlex.split(cmd)
+
+        else:
+            cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE ' \
+                  f'vim -u {str(get_config("vimderc"))}'
+            cmd = shlex.split(cmd)
         return _run(cmd)
 
     return die('[ERROR] VimDE is not initialized.  Please run "vimde --init" to ' \

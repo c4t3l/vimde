@@ -25,7 +25,7 @@
 %global vps_lc 0d1129e5cf1b0e3a90e923c3b5f40133bf153f7c
 %global vps_sc %(c=%{vps_lc}; echo ${c:0:7})
 
-%global vimux_lc 37f41195e6369ac602a08ec61364906600b771f1
+%global vimux_lc f7c41607d9246ec4b6cc28587cce84d75d106e3e
 %global vimux_sc %(c=%{vimux_lc}; echo ${c:0:7})
 
 %global vtnav_lc 44ba6fbe45895cd541ebfc87606add5c76e3829b
@@ -52,7 +52,7 @@ Source0:        %{url}/archive/%{version}.tar.gz
 Source1:        https://github.com/VundleVim/Vundle.vim/archive/%{vundle_lc}/Vundle.vim-%{vundle_sc}.tar.gz
 Source2:        https://github.com/saltstack/salt-vim/archive/%{salt_lc}/salt_vim-%{salt_sc}.tar.gz
 Source3:        https://github.com/Glench/Vim-Jinja2-Syntax/archive/%{jinja_lc}/Vim-Jinja2-Syntax-%{jinja_sc}.tar.gz
-Source4:        https://github.com/benmills/vimux/archive/%{vimux_lc}/vimux-%{vimux_sc}.tar.gz
+Source4:        https://github.com/preservim/vimux/archive/%{vimux_lc}/vimux-%{vimux_sc}.tar.gz
 Source5:        https://github.com/jimeh/tmux-themepack/archive/%{muxtheme_lc}/tmux-themepack-%{muxtheme_sc}.tar.gz
 Source7:        https://github.com/vim-scripts/vim-auto-save/archive/%{vas_version}.tar.gz
 Source8:        https://github.com/Shougo/deoplete.nvim/archive/%{deo_version}.tar.gz
@@ -80,6 +80,24 @@ Requires:       surf
 Requires:       vim-fugitive
 Requires:       wemux
 BuildArch:      noarch
+
+# Bundling is used here because none of the provided packages are versioned
+# Most are not widely in use.
+Provides:       bundled(vim-Vundle)
+Provides:       bundled(salt-vim)
+Provides:       bundled(Vim-Jinja2-Syntax)
+Provides:       bundled(vim-vimux)
+Provides:       bundled(tmux-themepack)
+Provides:       bundled(vim-auto-save)
+Provides:       bundled(deoplete-nvim)
+Provides:       bundled(nvim-yarp)
+Provides:       bundled(vim-hug-neovim-rpc)
+Provides:       bundled(deoplete-jedi)
+Provides:       bundled(vim-supertab)
+Provides:       bundled(vim-nerdtree-fugitive)
+Provides:       bundled(vim-tmux-navigator)
+Provides:       bundled(vim-pandoc)
+Provides:       bundled(vim-pandoc-syntax)
 
 
 %description

@@ -7,4 +7,4 @@ dist/
 results_*/
 **.src.rpm
 **.rpm
-
+.venv/

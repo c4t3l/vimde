@@ -2,10 +2,11 @@
 .venv/
 vimde.egg-info/
 dist/
+rpmbuild/
 **.swp
 **/__pycache__
 **.tar.gz
 results_*/
 **.src.rpm
 **.rpm
-.venv/
+

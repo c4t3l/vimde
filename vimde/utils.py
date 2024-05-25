@@ -120,7 +120,7 @@ def get_config(app, local=False, system=False):
     :system: bool
     """
 
-    app_global = pathlib.Path('/etc/' + app)
+    app_global = pathlib.Path('/etc/vimde' + app)
     app_local = pathlib.Path.home().joinpath('.' + app)
 
     if local:

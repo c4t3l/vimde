@@ -14,8 +14,8 @@ from vimde import utils
 @click.option("-d", "--debug", is_flag=True, help="Start VimDE with debug logging")
 @click.option("-i", "--init", is_flag=True, help="Initialize VimDE with user configurations")
 @click.option("-u", "--update_plugins", is_flag=True, help="Update plugins to newest versions")
-@click.option("-v", "--version", is_flag=True, help="Show the version number")
 @click.option("-s", "--start", is_flag=True, default=True, help="Start VimDE. This is the default")
+@click.version_option()
 def main(debug, init, update_plugins, start):
     """
     VimDE is a lightweight vim+tmux based IDE. It is highly customizable and

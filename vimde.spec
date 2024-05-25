@@ -42,7 +42,7 @@
 
 
 Name:           vimde
-Version:        2022.8.0
+Version:        2024.5.0rc0
 Release:        1%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
 License:        MIT and ASL2.0 and BSD3 and WTFPL2
@@ -169,11 +169,14 @@ cp -ar %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tm
 %{_datarootdir}/%{name}/
 %{_datarootdir}/tmuxde/
 %{_bindir}/%{name}
-%config(noreplace) %{_sysconfdir}/vimderc
-%config(noreplace) %{_sysconfdir}/tmuxderc
+%config(noreplace) %{_sysconfdir}/%{name}/vimderc
+%config(noreplace) %{_sysconfdir}/%{name}/tmuxderc
 
 
 %changelog
+* Sat May 25 2024 Robby Callicotte <rcallicotte@mailbox.org> - 2024.5.0rc0-1
+- Updated to Release candidate
+
 * Sun Aug 21 2022 Robby Callicotte <rcallicotte@mailbox.org> - 2022.8.0-1
 - Rebased to new version
 

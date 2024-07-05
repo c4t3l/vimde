@@ -19,12 +19,6 @@
 %global supertab_lc 40fe711e088e2ab346738233dd5adbb1be355172
 %global supertab_sc %(c=%{supertab_lc}; echo ${c:0:7})
 
-%global vp_lc e49f9e7e3fc041dab0e9a1de4b564b3ddd8f77aa
-%global vp_sc %(c=%{vp_lc}; echo ${c:0:7})
-
-%global vps_lc 0d1129e5cf1b0e3a90e923c3b5f40133bf153f7c
-%global vps_sc %(c=%{vps_lc}; echo ${c:0:7})
-
 %global vimux_lc f7c41607d9246ec4b6cc28587cce84d75d106e3e
 %global vimux_sc %(c=%{vimux_lc}; echo ${c:0:7})
 
@@ -48,7 +42,7 @@ Summary:        Simple Development Environment based on Vim and tmux
 License:        MIT and ASL2.0 and BSD3 and WTFPL2
 URL:            https://github.com/c4t3l/vimde
 
-Source0:        %{url}/archive/%{version}.tar.gz
+Source0:        %{url}/archive/%{name}-%{version}.tar.gz
 Source1:        https://github.com/VundleVim/Vundle.vim/archive/%{vundle_lc}/Vundle.vim-%{vundle_sc}.tar.gz
 Source2:        https://github.com/saltstack/salt-vim/archive/%{salt_lc}/salt_vim-%{salt_sc}.tar.gz
 Source3:        https://github.com/Glench/Vim-Jinja2-Syntax/archive/%{jinja_lc}/Vim-Jinja2-Syntax-%{jinja_sc}.tar.gz
@@ -62,8 +56,6 @@ Source11:       https://github.com/deoplete-plugins/deoplete-jedi/archive/%{deoj
 Source12:       https://github.com/ervandew/supertab/archive/%{supertab_lc}/supertab-%{supertab_sc}.tar.gz
 Source13:       https://github.com/low-ghost/nerdtree-fugitive/archive/%{ntf_lc}/nerdtree-fugitive-%{ntf_sc}.tar.gz
 Source14:       https://github.com/christoomey/vim-tmux-navigator/archive/%{vtnav_lc}/vim-tmux-navigator-%{vtnav_sc}.tar.gz
-Source15:       https://github.com/vim-pandoc/vim-pandoc/archive/%{vp_lc}/vim-pandoc-%{vp_sc}.tar.gz
-Source16:       https://github.com/vim-pandoc/vim-pandoc-syntax/archive/%{vps_lc}/vim-pandoc-syntax-%{vps_sc}.tar.gz
 
 BuildRequires:  python3-devel
 Requires:       awesome-vim-colorschemes
@@ -96,8 +88,6 @@ Provides:       bundled(deoplete-jedi)
 Provides:       bundled(vim-supertab)
 Provides:       bundled(vim-nerdtree-fugitive)
 Provides:       bundled(vim-tmux-navigator)
-Provides:       bundled(vim-pandoc)
-Provides:       bundled(vim-pandoc-syntax)
 
 
 %description
@@ -108,7 +98,6 @@ file.
 
 # We simply need to untar the sources and copy them to /usr/share/vimde/bundle
 %prep
-%autosetup -n %{name}-%{version}
 %autosetup -D -b 1 -n Vundle.vim-%{vundle_lc}
 %autosetup -D -b 2 -n salt-vim-%{salt_lc}
 %autosetup -D -b 3 -n Vim-Jinja2-Syntax-%{jinja_lc}
@@ -122,8 +111,7 @@ file.
 %autosetup -D -b 12 -n supertab-%{supertab_lc}
 %autosetup -D -b 13 -n nerdtree-fugitive-%{ntf_lc}
 %autosetup -D -b 14 -n vim-tmux-navigator-%{vtnav_lc}
-%autosetup -D -b 15 -n vim-pandoc-%{vp_lc}
-%autosetup -D -b 16 -n vim-pandoc-syntax-%{vps_lc}
+%autosetup -n %{name}-%{version}
 
 %generate_buildrequires
 %pyproject_buildrequires
@@ -137,13 +125,14 @@ file.
 %pyproject_install
 %pyproject_save_files %{name}
 
-mkdir -vp %{buildroot}%{_datarootdir}/doc
-mkdir -vp %{buildroot}%{_datarootdir}/%{name}/bundle
-mkdir -vp %{buildroot}%{_datarootdir}/tmuxde/plugins
+mkdir -p %{buildroot}%{_datarootdir}/doc
+mkdir -p %{buildroot}%{_datarootdir}/%{name}/bundle
+mkdir -p %{buildroot}%{_datarootdir}/tmuxde/plugins
+mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 
-install -Dpm 0755 %{_builddir}/%{name}-%{version}/%{name} %{buildroot}%{_prefix}/bin/%{name}
-install -Dpm 0644 %{_builddir}/%{name}-%{version}/%{name}.d/vimderc %{buildroot}%{_sysconfdir}/vimderc
-install -Dpm 0644 %{_builddir}/%{name}-%{version}/%{name}.d/tmuxderc %{buildroot}%{_sysconfdir}/tmuxderc
+#install -Dpm 0755 %%{_builddir}/%%{name}-%%{version}/%%{name} %%{buildroot}%%{_prefix}/bin/%%{name}
+install -Dpm 0644 %{_builddir}/%{name}-%{version}/%{name}.d/vimderc %{buildroot}%{_sysconfdir}/%{name}/vimderc
+install -Dpm 0644 %{_builddir}/%{name}-%{version}/%{name}.d/tmuxderc %{buildroot}%{_sysconfdir}/%{name}/tmuxderc
 cp -ar %{_builddir}/Vundle.vim-%{vundle_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vundle.vim
 cp -ar %{_builddir}/salt-vim-%{salt_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/salt-vim
 cp -ar %{_builddir}/Vim-Jinja2-Syntax-%{jinja_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vim-Jinja2-Syntax
@@ -156,8 +145,6 @@ cp -ar %{_builddir}/deoplete-jedi-%{deojedi_lc} %{buildroot}%{_datarootdir}/%{na
 cp -ar %{_builddir}/supertab-%{supertab_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/supertab
 cp -ar %{_builddir}/nerdtree-fugitive-%{ntf_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/nerdtree-fugitive
 cp -ar %{_builddir}/vim-tmux-navigator-%{vtnav_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-tmux-navigator
-cp -ar %{_builddir}/vim-pandoc-%{vp_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-pandoc
-cp -ar %{_builddir}/vim-pandoc-syntax-%{vps_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-pandoc-syntax
 cp -ar %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tmuxde/plugins/tmux-themepack
 
 

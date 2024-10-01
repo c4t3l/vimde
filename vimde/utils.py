@@ -102,18 +102,18 @@ def get_config(app):
     """
 
     app_global = pathlib.Path(f"/etc/vimde/{app}")
-    app_local = pathlib.Path.home().joinpath('.' + app)
+    app_local = pathlib.Path.home().joinpath(f".{app}")
 
-    if local:
-        return app_local.absolute()
+    # if local:
+    #     return app_local.absolute()
 
-    if system:
-        return app_global.absolute()
+    # if system:
+    #     return app_global.absolute()
 
-    if app_local.exists():
-        return app_local.absolute()
+    # if app_local.exists():
+    #     return app_local.absolute()
 
-    return app_global.absolute()
+    # return app_global.absolute()
 
 
 def set_title():

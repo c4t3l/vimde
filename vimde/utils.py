@@ -13,17 +13,6 @@ import setproctitle
 from click import secho
 
 
-def _lockfile(create=False):
-    """
-    Check if lockfile exists. If "create=True" is passed, then create the lockfile.
-    """
-    lock = pathlib.Path.home().joinpath('.vimde/LockFile')
-
-    if create:
-        pathlib.Path.touch(lock)
-    return lock.exists()
-
-
 def die(msg, color=None):
     """
     Kills execution of the program.  Also prints a nice message for the user.
@@ -35,20 +24,13 @@ def die(msg, color=None):
 def init_environment():
     """
     Creates the $HOME/.vimde and $HOME/.tmuxde dirs.
-    This function is destructive to user vimderc and tmuxderc if LockFile
-    does not exist.
     """
     vimde_dir = pathlib.Path.home().joinpath('.vimde')
     tmuxde_dir = pathlib.Path.home().joinpath('.tmuxde')
     vimde_dir.mkdir(exist_ok=True)
     tmuxde_dir.mkdir(exist_ok=True)
 
-    if _lockfile():
-        die('[WARNING] ~/.vimde/LockFile exists!!  Cowardly refusing to ' \
-            're-initialize environment.', color='red')
-
     if copy_configs():
-        _lockfile(create=True)
         copy_plugins()
         install_plugins()
         secho('[INFO] VimDE environment initialized. Please restart VimDE.',
@@ -109,18 +91,17 @@ def install_plugins(update=False):
     return _run(cmd)
 
 
-def get_config(app, local=False, system=False):
+def get_config(app):
+    import pudb;pu.db
     """
     If user config detected it will override
     the systemwide config
 
-    Accepts three (3) args
+    Accepts three (1) arg
     :app: str (vimderc|tmuxderc)
-    :local: bool
-    :system: bool
     """
 
-    app_global = pathlib.Path('/etc/vimde' + app)
+    app_global = pathlib.Path(f"/etc/vimde/{app}")
     app_local = pathlib.Path.home().joinpath('.' + app)
 
     if local:
@@ -155,22 +136,17 @@ def _run(*args):
 
 
 def start_vimde(debug=False):
-    #import pudb; pu.db
     """
     Handles startup of the application.
     """
 
-    if _lockfile():
-        if debug:
-            cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE_DEBUG-MODE ' \
-                  f'vim -u {str(get_config("vimderc"))} -V9{pathlib.Path.home().joinpath(".vimde", "debug.log")}'
-            cmd = shlex.split(cmd)
+    if debug:
+        cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE_DEBUG-MODE ' \
+              f'vim -u {str(get_config("vimderc"))} -V9{pathlib.Path.home().joinpath(".vimde", "debug.log")}'
+        cmd = shlex.split(cmd)
 
-        else:
-            cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE ' \
-                  f'vim -u {str(get_config("vimderc"))}'
-            cmd = shlex.split(cmd)
-        return _run(cmd)
-
-    return die('[ERROR] VimDE is not initialized.  Please run "vimde --init" to ' \
-               'initialize your environment.', color='red')
+    else:
+        cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE ' \
+              f'vim -u {str(get_config("vimderc"))}'
+        cmd = shlex.split(cmd)
+    return _run(cmd)

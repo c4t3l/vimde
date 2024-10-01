@@ -7,7 +7,7 @@ filetype off
 " If you choose to update vundle on your own, incomment the following line.
 "set rtp+=~/.vimde/bundle/Vundle.vim
 set rtp+=/usr/share/vimde/bundle/Vundle.vim
-call vundle#begin('~/.vimde/bundle')
+call vundle#begin('/usr/share/vimde/bundle')
 
 Plugin 'deoplete-jedi', {'pinned': 1}
 Plugin 'deoplete.nvim', {'pinned': 1}

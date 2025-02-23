@@ -3,6 +3,7 @@
 vimde.egg-info/
 dist/
 rpmbuild/
+rpm/
 **.swp
 **/__pycache__
 **.tar.gz

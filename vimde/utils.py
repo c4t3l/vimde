@@ -33,7 +33,7 @@ def init_environment():
     if copy_configs():
         copy_plugins()
         install_plugins()
-        secho('[INFO] VimDE environment initialized. Please restart VimDE.',
+        secho('[INFO] User VimDE environment initialized. Please restart VimDE.',
                 color='yellow')
 
 
@@ -92,7 +92,6 @@ def install_plugins(update=False):
 
 
 def get_config(app):
-    import pudb;pu.db
     """
     If user config detected it will override
     the systemwide config
@@ -105,12 +104,12 @@ def get_config(app):
     app_local = pathlib.Path.home().joinpath(f".{app}")
 
     if app_local.exists():
-        myconfig = app_local.absolute()
+        # myconfig = app_local.absolute()
+        return app_local.absolute()
 
     if app_global.exists():
-        myconfig = app_global.absolute()
-
-    return myconfig
+        # myconfig = app_global.absolute()
+        return app_global.absolute()
 
 
 def set_title():

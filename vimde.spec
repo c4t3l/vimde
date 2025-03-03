@@ -42,7 +42,7 @@
 
 
 Name:           vimde
-Version:        2024.5.0rc1
+Version:        2025.3.0rc1
 Release:        1%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
 License:        MIT and ASL2.0 and BSD3 and WTFPL2
@@ -174,7 +174,7 @@ cp -ar %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tm
 
 
 %changelog
-* Sun Mar 2 2025 Robby Callicotte <rcallicotte@mailbox.org> - 2024.5.0rc1-1
+* Sun Mar 2 2025 Robby Callicotte <rcallicotte@mailbox.org> - 2025.3.0rc1-1
 - Updated to Release candidate rc1
 
 * Sat May 25 2024 Robby Callicotte <rcallicotte@mailbox.org> - 2024.5.0rc0-1

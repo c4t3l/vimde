@@ -42,7 +42,7 @@ Summary:        Simple Development Environment based on Vim and tmux
 License:        MIT AND Apache-2.0 AND BSD-3-Clause AND WTFPL
 URL:            https://github.com/c4t3l/vimde
 
-Source0:        %{url}/archive/%{name}-%{version}.tar.gz
+Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        https://github.com/VundleVim/Vundle.vim/archive/%{vundle_lc}/Vundle.vim-%{vundle_sc}.tar.gz
 Source2:        https://github.com/saltstack/salt-vim/archive/%{salt_lc}/salt_vim-%{salt_sc}.tar.gz
 Source3:        https://github.com/Glench/Vim-Jinja2-Syntax/archive/%{jinja_lc}/Vim-Jinja2-Syntax-%{jinja_sc}.tar.gz

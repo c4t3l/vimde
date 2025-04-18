@@ -36,10 +36,10 @@
 
 
 Name:           vimde
-Version:        2025.3.0rc1
+Version:        2025.1
 Release:        1%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
-License:        MIT and ASL2.0 and BSD3 and WTFPL2
+License:        MIT AND Apache-2.0 AND BSD-3-Clause AND WTFPL
 URL:            https://github.com/c4t3l/vimde
 
 Source0:        %{url}/archive/%{name}-%{version}.tar.gz
@@ -152,11 +152,14 @@ cp -ar %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tm
 
 
 %files -f %{pyproject_files}
+%license LICENSE
+%doc README.md
 %{_datarootdir}/%{name}/
 %{_datarootdir}/tmuxde/
 %{_bindir}/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}/vimderc
 %config(noreplace) %{_sysconfdir}/%{name}/tmuxderc
+%{_mandir}/man1/%{name}.1*
 
 
 %changelog

@@ -13,17 +13,6 @@ import setproctitle
 from click import secho
 
 
-def _lockfile(create=False):
-    """
-    Check if lockfile exists. If "create=True" is passed, then create the lockfile.
-    """
-    lock = pathlib.Path.home().joinpath('.vimde/LockFile')
-
-    if create:
-        pathlib.Path.touch(lock)
-    return lock.exists()
-
-
 def die(msg, color=None):
     """
     Kills execution of the program.  Also prints a nice message for the user.
@@ -35,8 +24,6 @@ def die(msg, color=None):
 def init_environment():
     """
     Creates the $HOME/.vimde and $HOME/.tmuxde dirs.
-    This function is destructive to user vimderc and tmuxderc if LockFile
-    does not exist.
     """
     import pudb; pu.db
     if _lockfile():

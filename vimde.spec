@@ -36,7 +36,7 @@
 
 
 Name:           vimde
-Version:        2024.5.0rc0
+Version:        2025.3.0rc1
 Release:        1%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
 License:        MIT and ASL2.0 and BSD3 and WTFPL2
@@ -130,7 +130,6 @@ mkdir -p %{buildroot}%{_datarootdir}/%{name}/bundle
 mkdir -p %{buildroot}%{_datarootdir}/tmuxde/plugins
 mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 
-#install -Dpm 0755 %%{_builddir}/%%{name}-%%{version}/%%{name} %%{buildroot}%%{_prefix}/bin/%%{name}
 install -Dpm 0644 %{_builddir}/%{name}-%{version}/%{name}.d/vimderc %{buildroot}%{_sysconfdir}/%{name}/vimderc
 install -Dpm 0644 %{_builddir}/%{name}-%{version}/%{name}.d/tmuxderc %{buildroot}%{_sysconfdir}/%{name}/tmuxderc
 cp -ar %{_builddir}/Vundle.vim-%{vundle_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vundle.vim
@@ -161,6 +160,9 @@ cp -ar %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tm
 
 
 %changelog
+* Sun Mar 2 2025 Robby Callicotte <rcallicotte@mailbox.org> - 2025.1-1
+- Updated to 2025.1
+
 * Sat May 25 2024 Robby Callicotte <rcallicotte@mailbox.org> - 2024.5.0rc0-1
 - Updated to Release candidate
 

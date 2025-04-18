@@ -18,77 +18,72 @@ def die(msg, color=None):
     Kills execution of the program.  Also prints a nice message for the user.
     """
     secho(msg, fg=color)
-    sys.exit(1)
+    return sys.exit(1)
 
 
 def init_environment():
     """
     Creates the $HOME/.vimde and $HOME/.tmuxde dirs.
     """
+    import pudb; pu.db
+    if _lockfile():
+        die('[WARNING] ~/.vimde/LockFile exists!!  Cowardly refusing to ' \
+            're-initialize environment.', color='yellow')
+
     vimde_dir = pathlib.Path.home().joinpath('.vimde')
     tmuxde_dir = pathlib.Path.home().joinpath('.tmuxde')
     vimde_dir.mkdir(exist_ok=True)
     tmuxde_dir.mkdir(exist_ok=True)
 
-    if copy_configs():
-        copy_plugins()
-        install_plugins()
-        secho('[INFO] User VimDE environment initialized. Please restart VimDE.',
-                color='yellow')
+    for app in ["tmuxderc", "vimderc"]:
+        if copy_configs(app):
+            install_plugins()
+   
+    # Protect the user plugins/configuration data
+    return _lockfile(create=True), secho('[INFO] VimDE environment initialized. Please restart VimDE.',
+                 color='yellow')
 
 
-def copy_configs():
+def copy_configs(app): 
     """
     Copy system config files to the user home directory
-    """
-    global_vimderc = get_config('vimderc', system=True)
-    global_tmuxderc = get_config('tmuxderc', system=True)
-    local_vimderc = get_config('vimderc', local=True)
-    local_tmuxderc = get_config('tmuxderc', local=True)
-    shutil.copy(global_vimderc, local_vimderc)
-    shutil.copy(global_tmuxderc, local_tmuxderc)
-
-    if not (pathlib.Path.exists(local_vimderc)
-            and pathlib.Path.exists(local_tmuxderc)):
-        die('[ERROR] Configuration file copy failed. ' \
-            'Please rerun "vimde --init".', color='red')
-
-
-def copy_plugins():
-    """
-    Copies plugins from base install path to user path.
+    'app' can be either "vimderc" or "tmuxderc"
+    The operation is destructive to user config path, be sure to
+    set _lockfile to protect.
     """
 
-    system_vim_plugins_path = pathlib.Path('/usr/share/vimde/bundle')
-    user_vim_plugins_path = pathlib.Path.home().joinpath('.vimde/bundle')
-    system_tmux_plugins_path = pathlib.Path('/usr/share/tmuxde/plugins')
-    user_tmux_plugins_path = pathlib.Path.home().joinpath('.tmuxde/plugins')
+    app_global = pathlib.Path().joinpath('/etc/vimde/' + app)
+    app_local = pathlib.Path.home().joinpath('.' + app)
 
-    shutil.rmtree(user_vim_plugins_path, ignore_errors=True)
-    shutil.rmtree(user_tmux_plugins_path, ignore_errors=True)
-    vim_copy = shutil.copytree(system_vim_plugins_path, user_vim_plugins_path)
-    tmux_copy = shutil.copytree(system_tmux_plugins_path, user_tmux_plugins_path)
-    return vim_copy, tmux_copy
+    return shutil.copy(app_global, app_local)
 
 
 def install_plugins(update=False):
     """
     Installs base set of Vundle plugins to local user account.
     This relies on provided plugins from /usr/share/vimde/bundle.
+    The operation is destructive to user plugin path, be sure to
+    set _lockfile to proctect.
 
     vim +PluginInstall +qall
     """
     if update:
-        if not _lockfile():
-            die('[ERROR] VimDE is not initialized.  Please run "vimde --init" ' \
-                'to initialize your environment.', color='red')
-        cmd = f'vim -u  {str(get_config("vimderc"))} +PluginUpdate +qall'
+        cmd = f"vim -u {str(get_config('vimderc'))} +PluginInstall +qall"
+        cmd = shlex.split(cmd)
+        return _run(cmd)
+    
+    global_vim_plugins_path = pathlib.Path('/usr/share/vimde/bundle')
+    user_vim_plugins_path = pathlib.Path.home().joinpath('.vimde/bundle')
 
-    else:
-        cmd = f'vim -u {str(get_config("vimderc"))} +PluginInstall +qall'
+    global_tmux_plugins_path = pathlib.Path('/usr/share/tmuxde/plugins')
+    user_tmux_plugins_path = pathlib.Path.home().joinpath('.tmuxde/plugins')
 
-    cmd = shlex.split(cmd)
-    return _run(cmd)
+    shutil.rmtree(user_vim_plugins_path, ignore_errors=True)
+    shutil.rmtree(user_tmux_plugins_path, ignore_errors=True)
+
+    vim_copy = shutil.copytree(global_vim_plugins_path, user_vim_plugins_path)
+    tmux_copy = shutil.copytree(global_tmux_plugins_path, user_tmux_plugins_path)
+    return vim_copy, tmux_copy
 
 
 def get_config(app):
@@ -100,17 +95,14 @@ def get_config(app):
     :app: str (vimderc|tmuxderc)
     """
 
-    app_global = pathlib.Path(f"/etc/vimde/{app}")
-    app_local = pathlib.Path.home().joinpath(f".{app}")
+    app_global = pathlib.Path().joinpath('/etc/vimde/' + app)
+    app_local = pathlib.Path.home().joinpath('.' + app)
 
-    if app_local.exists():
-        # myconfig = app_local.absolute()
-        return app_local.absolute()
+    # If global configs dont exist we have a major problem
+    if not app_global.exists():
+        die(f"[ERROR] Filepath: {app_global.absolute()} is missing!! Aborting startup.", color="red")
 
-    if app_global.exists():
-        # myconfig = app_global.absolute()
-        return app_global.absolute()
-
+    return app_local.absolute() if app_local.exists() else app_global.absolute()
 
 def set_title():
     """Set the process title for ps output"""
@@ -143,6 +135,6 @@ def start_vimde(debug=False):
 
     else:
         cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE ' \
-              f'vim -u {str(get_config("vimderc"))}'
+                  f'vim -u {str(get_config("vimderc"))}'
         cmd = shlex.split(cmd)
     return _run(cmd)

@@ -25,13 +25,13 @@ def main(debug, init, update_plugins, start):
     if debug:
         utils.start_vimde(debug=True)
 
-    if init:
+    elif init:
         utils.init_environment()
 
-    if update_plugins:
-        utils.install_plugins(update=True)
+    elif update_plugins:
+        utils.install_plugins()
 
-    if start:
+    else:
         utils.start_vimde()
 
     return click.secho(f"Bye bye. See you later {getpass.getuser()}!!", fg="cyan")

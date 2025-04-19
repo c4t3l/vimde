@@ -25,12 +25,15 @@ def init_environment():
     """
     Creates the $HOME/.vimde and $HOME/.tmuxde dirs.
     """
-    if _lockfile():
-        die('[WARNING] ~/.vimde/LockFile exists!!  Cowardly refusing to ' \
-            're-initialize environment.', color='yellow')
+    try:
+        if _lockfile():
+            die("[WARNING] ~/.vimde/LockFile exists!!  Cowardly refusing to " \
+                "re-initialize environment.", color="yellow")
+    except NameError:
+        secho("[INFO] Initializing local user environment.", color="cyan")
 
-    vimde_dir = pathlib.Path.home().joinpath('.vimde')
-    tmuxde_dir = pathlib.Path.home().joinpath('.tmuxde')
+    vimde_dir = pathlib.Path.home().joinpath(".vimde")
+    tmuxde_dir = pathlib.Path.home().joinpath(".tmuxde")
     vimde_dir.mkdir(exist_ok=True)
     tmuxde_dir.mkdir(exist_ok=True)
 
@@ -39,8 +42,8 @@ def init_environment():
             install_plugins()
    
     # Protect the user plugins/configuration data
-    return _lockfile(create=True), secho('[INFO] VimDE environment initialized. Please restart VimDE.',
-                 color='cyan')
+    return _lockfile(create=True), secho("[INFO] VimDE environment initialized. Please restart VimDE.",
+                 color="cyan")
 
 
 def copy_configs(app): 
@@ -51,8 +54,8 @@ def copy_configs(app):
     set _lockfile to protect.
     """
 
-    app_global = pathlib.Path().joinpath('/etc/vimde/' + app)
-    app_local = pathlib.Path.home().joinpath('.' + app)
+    app_global = pathlib.Path().joinpath("/etc/vimde/" + app)
+    app_local = pathlib.Path.home().joinpath("." + app)
 
     return shutil.copy(app_global, app_local)
 
@@ -71,11 +74,11 @@ def install_plugins(update=False):
         cmd = shlex.split(cmd)
         return _run(cmd)
     
-    global_vim_plugins_path = pathlib.Path('/usr/share/vimde/bundle')
-    user_vim_plugins_path = pathlib.Path.home().joinpath('.vimde/bundle')
+    global_vim_plugins_path = pathlib.Path("/usr/share/vimde/bundle")
+    user_vim_plugins_path = pathlib.Path.home().joinpath(".vimde/bundle")
 
-    global_tmux_plugins_path = pathlib.Path('/usr/share/tmuxde/plugins')
-    user_tmux_plugins_path = pathlib.Path.home().joinpath('.tmuxde/plugins')
+    global_tmux_plugins_path = pathlib.Path("/usr/share/tmuxde/plugins")
+    user_tmux_plugins_path = pathlib.Path.home().joinpath(".tmuxde/plugins")
 
     shutil.rmtree(user_vim_plugins_path, ignore_errors=True)
     shutil.rmtree(user_tmux_plugins_path, ignore_errors=True)
@@ -94,8 +97,8 @@ def get_config(app):
     :app: str (vimderc|tmuxderc)
     """
 
-    app_global = pathlib.Path().joinpath('/etc/vimde/' + app)
-    app_local = pathlib.Path.home().joinpath('.' + app)
+    app_global = pathlib.Path().joinpath("/etc/vimde/" + app)
+    app_local = pathlib.Path.home().joinpath("." + app)
 
     # If global configs dont exist we have a major problem
     if not app_global.exists():
@@ -103,9 +106,10 @@ def get_config(app):
 
     return app_local.absolute() if app_local.exists() else app_global.absolute()
 
+
 def set_title():
     """Set the process title for ps output"""
-    setproctitle.setproctitle('vimde')
+    setproctitle.setproctitle("vimde")
 
 
 def _run(*args):
@@ -116,8 +120,8 @@ def _run(*args):
     # Basic arg validation
     my_args = args[0]
     if not isinstance(my_args, list):
-        sys.stderr.write(f'dumping args: {my_args}\n')
-        return die('[ERROR] passed badly formatted list to _run.', color='red')
+        sys.stderr.write(f"dumping args: {my_args}\n")
+        return die("[ERROR] passed badly formatted list to _run.", color="red")
 
     return subprocess.run(my_args, check=True)
 
@@ -128,12 +132,12 @@ def start_vimde(debug=False):
     """
 
     if debug:
-        cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE_DEBUG-MODE ' \
-              f'vim -u {str(get_config("vimderc"))} -V9{pathlib.Path.home().joinpath(".vimde", "debug.log")}'
+        cmd = f"tmux -f {str(get_config('tmuxderc'))} new-session -s VimDE_DEBUG-MODE " \
+              f"vim -u {str(get_config('vimderc'))} -V9{pathlib.Path.home().joinpath('.vimde', 'debug.log')}"
         cmd = shlex.split(cmd)
 
     else:
-        cmd = f'tmux -f {str(get_config("tmuxderc"))} new-session -s VimDE ' \
-                  f'vim -u {str(get_config("vimderc"))}'
+        cmd = f"tmux -f {str(get_config('tmuxderc'))} new-session -s VimDE " \
+                  f"vim -u {str(get_config('vimderc'))}"
         cmd = shlex.split(cmd)
     return _run(cmd)

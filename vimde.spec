@@ -130,8 +130,9 @@ mkdir -p %{buildroot}%{_datarootdir}/%{name}/bundle
 mkdir -p %{buildroot}%{_datarootdir}/tmuxde/plugins
 mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 
-install -Dpm 0644 %{_builddir}/%{name}-%{version}/%{name}.d/vimderc %{buildroot}%{_sysconfdir}/%{name}/vimderc
-install -Dpm 0644 %{_builddir}/%{name}-%{version}/%{name}.d/tmuxderc %{buildroot}%{_sysconfdir}/%{name}/tmuxderc
+install -Dpm 0644 %{_builddir}/%{name}-%{version}/conf.d/vimderc %{buildroot}%{_sysconfdir}/%{name}/vimderc
+install -Dpm 0644 %{_builddir}/%{name}-%{version}/conf.d/tmuxderc %{buildroot}%{_sysconfdir}/%{name}/tmuxderc
+install -Dpm 0644 %{_builddir}/%{name}-%{version}/doc/vimde.1 %{buildroot}%{_mandir}/man1/%{name}.1
 cp -ar %{_builddir}/Vundle.vim-%{vundle_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vundle.vim
 cp -ar %{_builddir}/salt-vim-%{salt_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/salt-vim
 cp -ar %{_builddir}/Vim-Jinja2-Syntax-%{jinja_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vim-Jinja2-Syntax

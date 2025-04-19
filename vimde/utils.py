@@ -25,7 +25,6 @@ def init_environment():
     """
     Creates the $HOME/.vimde and $HOME/.tmuxde dirs.
     """
-    import pudb; pu.db
     if _lockfile():
         die('[WARNING] ~/.vimde/LockFile exists!!  Cowardly refusing to ' \
             're-initialize environment.', color='yellow')
@@ -41,7 +40,7 @@ def init_environment():
    
     # Protect the user plugins/configuration data
     return _lockfile(create=True), secho('[INFO] VimDE environment initialized. Please restart VimDE.',
-                 color='yellow')
+                 color='cyan')
 
 
 def copy_configs(app): 

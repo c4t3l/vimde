@@ -23,6 +23,7 @@ Plugin 'supertab', {'pinned': 1}
 Plugin 'vim-tmux-navigator', {'pinned': 1}
 Plugin 'vim-pandoc', {'pinned': 1}
 Plugin 'vim-pandoc-syntax', {'pinned': 1}
+Plugin 'vim-ripgrep', {'pinned': 1}
 
 
 

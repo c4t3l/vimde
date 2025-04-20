@@ -32,7 +32,7 @@
 %global yarp_sc %(c=%{yarp_lc}; echo ${c:0:7})
 
 %global vas_version 0.1.7
-%global deo_version 6.1A
+%global deo_version 6.1
 
 %global vim_rg_version 1.0.3
 

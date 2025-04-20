@@ -151,6 +151,7 @@ cp -ar %{_builddir}/supertab-%{supertab_lc} %{buildroot}%{_datarootdir}/%{name}/
 cp -ar %{_builddir}/nerdtree-fugitive-%{ntf_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/nerdtree-fugitive
 cp -ar %{_builddir}/vim-tmux-navigator-%{vtnav_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-tmux-navigator
 cp -ar %{_builddir}/tmux-themepack-%{muxtheme_lc} %{buildroot}%{_datarootdir}/tmuxde/plugins/tmux-themepack
+cp -ar %{_builddir}/vim-ripgrep-%{vim_rg_version} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-ripgrep
 
 
 %check

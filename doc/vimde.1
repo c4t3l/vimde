@@ -14,7 +14,7 @@
 . ftr VB CB
 . ftr VBI CBI
 .\}
-.TH "vimde" "1" "2024.4.0" "" ""
+.TH "vimde" "1" "2025.2" "" ""
 .hy
 .SH NAME
 .PP
@@ -32,14 +32,15 @@ default plugins.
 The following command line parameters are understood.
 .TP
 \f[V]--init\f[R], \f[V]-i\f[R]
-Initialize the environment.
-This effectively creates local user directories for plugins and
-generates default files.
-This command must be ran first before starting \f[V]vimde\f[R].
+Initialize the local user environment.
+This creates local user directories for plugins and generates default
+files.
+This command allows users to customize \f[V]vimde\f[R] to their liking.
 .TP
 \f[V]--update-plugins\f[R], \f[V]-u\f[R]
 Updates plugins for \f[V]vimde\f[R].
-This is useful if you add additional plugins to \f[V].vimderc\f[R].
+This is useful if you add additional plugins to
+\f[V]\[ti]/.vimderc\f[R].
 .TP
 \f[V]--start\f[R], \f[V]-s\f[R]
 Starts vimde.
@@ -47,7 +48,8 @@ This is the default option if none is given.
 .TP
 \f[V]--debug\f[R], \f[V]-d\f[R]
 Starts vimde in debug mode.
-This option prints runtime debug output to \f[V].vimde/debug.log\f[R].
+This option prints runtime debug output to
+\f[V]\[ti]/.vimde/debug.log\f[R].
 .SH ON-LINE HELP
 .PP
 Type \[lq]:help vimde\[rq] in \f[V]vimde\f[R] to get started.
@@ -72,4 +74,4 @@ Your personal \f[V]vimde-vim\f[R] customizations.
 \f[V]\[ti]/.tmuxderc\f[R]
 Your personal \f[V]vimde-tmux\f[R] customizations.
 .SH AUTHORS
-vimde Authors.
+Robby Callicotte.

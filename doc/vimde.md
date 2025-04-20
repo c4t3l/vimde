@@ -1,6 +1,6 @@
 % vimde(1) 
-% vimde Authors 
-% 2024.5.0
+% Robby Callicotte
+% 2025.2
 
 # NAME
 
@@ -20,20 +20,20 @@ around vim and tmux with a carefully curated list of default plugins.
 The following command line parameters are understood.
 
 `--init`, `-i`
-: Initialize the environment.  This effectively creates local user directories 
-  for plugins and generates default files. This command must be ran first 
-  before starting `vimde`.  
+: Initialize the local user environment.  This creates local user directories 
+  for plugins and generates default files. This command allows users to customize 
+  `vimde` to their liking. 
   
 `--update-plugins`, `-u`
 : Updates plugins for `vimde`.  This is useful if you add additional plugins 
-  to `.vimderc`.  
+  to `~/.vimderc`.  
 
 `--start`, `-s`
 : Starts vimde.  This is the default option if none is given.
 
 `--debug`, `-d`
 : Starts vimde in debug mode.  This option prints runtime debug output to 
-  `.vimde/debug.log`.
+  `~/.vimde/debug.log`.
 
 # ON-LINE HELP
 

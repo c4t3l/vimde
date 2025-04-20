@@ -32,7 +32,9 @@
 %global yarp_sc %(c=%{yarp_lc}; echo ${c:0:7})
 
 %global vas_version 0.1.7
-%global deo_version 6.1
+%global deo_version 6.1A
+
+%global vim_rg_version 1.0.3
 
 
 Name:           vimde
@@ -56,6 +58,7 @@ Source11:       https://github.com/deoplete-plugins/deoplete-jedi/archive/%{deoj
 Source12:       https://github.com/ervandew/supertab/archive/%{supertab_lc}/supertab-%{supertab_sc}.tar.gz
 Source13:       https://github.com/low-ghost/nerdtree-fugitive/archive/%{ntf_lc}/nerdtree-fugitive-%{ntf_sc}.tar.gz
 Source14:       https://github.com/christoomey/vim-tmux-navigator/archive/%{vtnav_lc}/vim-tmux-navigator-%{vtnav_sc}.tar.gz
+Source15:       https://github.com/jremmen/vim-ripgrep/archive/v%{vim_rg_version}/vim-ripgrep-v%{vim_rg_version}.tar.gz
 
 BuildRequires:  python3-devel
 Requires:       awesome-vim-colorschemes
@@ -75,19 +78,20 @@ BuildArch:      noarch
 
 # Bundling is used here because none of the provided packages are versioned
 # Most are not widely in use.
-Provides:       bundled(vim-Vundle)
-Provides:       bundled(salt-vim)
-Provides:       bundled(Vim-Jinja2-Syntax)
-Provides:       bundled(vim-vimux)
-Provides:       bundled(tmux-themepack)
-Provides:       bundled(vim-auto-save)
-Provides:       bundled(deoplete-nvim)
-Provides:       bundled(nvim-yarp)
-Provides:       bundled(vim-hug-neovim-rpc)
-Provides:       bundled(deoplete-jedi)
-Provides:       bundled(vim-supertab)
-Provides:       bundled(vim-nerdtree-fugitive)
-Provides:       bundled(vim-tmux-navigator)
+Provides:       bundled(vim-Vundle) = %{vundle_sc}
+Provides:       bundled(salt-vim) = %{salt_sc}
+Provides:       bundled(Vim-Jinja2-Syntax) = %{jinja_sc}
+Provides:       bundled(vim-vimux) = %{vimux_sc}
+Provides:       bundled(tmux-themepack) = %{muxtheme_sc}
+Provides:       bundled(vim-auto-save) = %{vas_version}
+Provides:       bundled(deoplete-nvim) = %{deo_version}
+Provides:       bundled(nvim-yarp) = %{yarp_sc}
+Provides:       bundled(vim-hug-neovim-rpc) = %{hug_sc}
+Provides:       bundled(deoplete-jedi) = %{deojedi_sc}
+Provides:       bundled(vim-supertab) = %{supertab_sc}
+Provides:       bundled(vim-nerdtree-fugitive) = %{ntf_sc}
+Provides:       bundled(vim-tmux-navigator) = %{vtnav_sc}
+Provides:       bundled(vim-ripgrep) = %{vim_rg_version}
 
 
 %description
@@ -111,6 +115,7 @@ file.
 %autosetup -D -b 12 -n supertab-%{supertab_lc}
 %autosetup -D -b 13 -n nerdtree-fugitive-%{ntf_lc}
 %autosetup -D -b 14 -n vim-tmux-navigator-%{vtnav_lc}
+%autosetup -D -b 15 -n vim-ripgrep-v%{vim_rg_version}
 %autosetup -n %{name}-%{version}
 
 %generate_buildrequires

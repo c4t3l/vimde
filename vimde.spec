@@ -115,7 +115,7 @@ file.
 %autosetup -D -b 12 -n supertab-%{supertab_lc}
 %autosetup -D -b 13 -n nerdtree-fugitive-%{ntf_lc}
 %autosetup -D -b 14 -n vim-tmux-navigator-%{vtnav_lc}
-%autosetup -D -b 15 -n vim-ripgrep-v%{vim_rg_version}
+%autosetup -D -b 15 -n vim-ripgrep-%{vim_rg_version}
 %autosetup -n %{name}-%{version}
 
 %generate_buildrequires

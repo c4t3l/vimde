@@ -1,6 +1,6 @@
 % vimde(1) 
 % Robby Callicotte
-% 2025.2
+% 2025.3
 
 # NAME
 
@@ -33,7 +33,7 @@ The following command line parameters are understood.
 
 `--debug`, `-d`
 : Starts vimde in debug mode.  This option prints runtime debug output to 
-  `~/.vimde/debug.log`.
+  `~/.vimde-debug.log`.
 
 # ON-LINE HELP
 

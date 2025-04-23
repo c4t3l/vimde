@@ -143,7 +143,7 @@ def start_vimde(debug=False):
 
     if debug:
         cmd = f"tmux -f {str(get_config('tmuxderc'))} new-session -s VimDE_DEBUG-MODE " \
-              f"vim -u {str(get_config('vimderc'))} -V9{pathlib.Path.home().joinpath('.vimde', 'debug.log')}"
+              f"vim -u {str(get_config('vimderc'))} -V9{pathlib.Path.home().joinpath('.vimde-debug.log')}"
         cmd = shlex.split(cmd)
 
     else:

@@ -38,7 +38,7 @@
 
 
 Name:           vimde
-Version:        2025.2
+Version:        2025.3
 Release:        1%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
 License:        MIT AND Apache-2.0 AND BSD-3-Clause AND WTFPL
@@ -170,6 +170,9 @@ cp -ar %{_builddir}/vim-ripgrep-%{vim_rg_version} %{buildroot}%{_datarootdir}/%{
 
 
 %changelog
+* Wed Apr 23 2025 Robby Callicotte <rcallicotte@fedoraproject.org> - 2025.3-1
+- Updated to version 2025.3
+
 * Sat Apr 19 2025 Robby Callicotte <rcallicotte@fedoraproject.org> - 2025.2-1
 - Updated to version 2025.2
 

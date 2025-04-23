@@ -2,4 +2,4 @@
 Vimde is a vim-based IDE
 """
 
-__version__ = "2025.2"
+__version__ = "2025.3"

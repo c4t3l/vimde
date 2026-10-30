@@ -98,9 +98,9 @@ Provides:       bundled(vim-ripgrep) = %{vim_rg_version}
 
 
 %description
-A simple Vim based IDE using vim plugins for Saltstack and RPM based development.
-VimDE can easily be extended by adding new plugins and editing your local .vimderc
-file.
+A simple Vim based IDE using vim plugins for Saltstack and RPM based
+development. VimDE can easily be extended by adding new plugins and
+editing your local .vimderc file.
 
 
 # We simply need to untar the sources and copy them to /usr/share/vimde/bundle
@@ -120,6 +120,15 @@ file.
 %autosetup -D -b 14 -n vim-tmux-navigator-%{vtnav_lc}
 %autosetup -D -b 15 -n vim-ripgrep-%{vim_rg_version}
 %autosetup -n %{name}-%{version}
+
+# Remove version control and lintrc files
+pushd %{_builddir}
+find . -type f \( -name "*.gitignore" \
+  -o -name ".github" \
+  -o -name "*.travis.yml" \
+  -o -name "*.flake8" \
+  -o -name ".vintrc.yaml" \) -exec rm {} \;
+
 
 %generate_buildrequires
 %pyproject_buildrequires

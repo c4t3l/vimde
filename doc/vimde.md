@@ -1,6 +1,6 @@
 % vimde(1) 
 % Robby Callicotte
-% 2025.3
+% 2026.1
 
 # NAME
 

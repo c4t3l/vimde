@@ -50,13 +50,13 @@ def init_environment():
     for app in ["tmuxderc", "vimderc"]:
         if copy_configs(app):
             install_plugins()
-   
+
     # Protect the user plugins/configuration data
     return _lockfile(create=True), secho("[INFO] VimDE environment initialized. Please restart VimDE.",
                  color="cyan")
 
 
-def copy_configs(app): 
+def copy_configs(app):
     """
     Copy system config files to the user home directory
     'app' can be either "vimderc" or "tmuxderc"
@@ -83,7 +83,7 @@ def install_plugins(update=False):
         cmd = f"vim -u {str(get_config('vimderc'))} +PluginInstall +qall"
         cmd = shlex.split(cmd)
         return _run(cmd)
-    
+
     global_vim_plugins_path = pathlib.Path("/usr/share/vimde/bundle")
     user_vim_plugins_path = pathlib.Path.home().joinpath(".vimde/bundle")
 

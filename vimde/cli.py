@@ -29,7 +29,7 @@ def main(debug, init, update_plugins, start):
         utils.init_environment()
 
     elif update_plugins:
-        utils.install_plugins()
+        utils.install_plugins(update=True)
 
     else:
         utils.start_vimde()

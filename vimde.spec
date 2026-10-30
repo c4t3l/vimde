@@ -1,6 +1,9 @@
 %global deojedi_lc 43058915007d92dc167b84dd5b8ada2d2a057a82
 %global deojedi_sc %(c=%{deojedi_lc}; echo ${c:0:7})
 
+%global deoplete_lc e5a47d4a2f0b2b6f568e708163e2354097e611c6
+%global deoplete_sc %(c=%{deojedi_lc}; echo ${c:0:7})
+
 %global hug_lc 93ae38792bc197c3bdffa2716ae493c67a5e7957
 %global hug_sc %(c=%{hug_lc}; echo ${c:0:7})
 
@@ -38,7 +41,7 @@
 
 
 Name:           vimde
-Version:        2025.3
+Version:        2026.1
 Release:        1%{?dist}
 Summary:        Simple Development Environment based on Vim and tmux
 License:        MIT AND Apache-2.0 AND BSD-3-Clause AND WTFPL
@@ -51,7 +54,7 @@ Source3:        https://github.com/Glench/Vim-Jinja2-Syntax/archive/%{jinja_lc}/
 Source4:        https://github.com/preservim/vimux/archive/%{vimux_lc}/vimux-%{vimux_sc}.tar.gz
 Source5:        https://github.com/jimeh/tmux-themepack/archive/%{muxtheme_lc}/tmux-themepack-%{muxtheme_sc}.tar.gz
 Source7:        https://github.com/vim-scripts/vim-auto-save/archive/%{vas_version}.tar.gz
-Source8:        https://github.com/Shougo/deoplete.nvim/archive/%{deo_version}.tar.gz
+Source8:        https://github.com/Shougo/deoplete.nvim/archive/%{deoplete_lc}/deoplete.nvim-%{deoplete_sc}.tar.gz
 Source9:        https://github.com/roxma/nvim-yarp/archive/%{yarp_lc}/nvim-yarp-%{yarp_sc}.tar.gz
 Source10:       https://github.com/roxma/vim-hug-neovim-rpc/archive/%{hug_lc}/vim-hug-neovim-rpc-%{hug_sc}.tar.gz
 Source11:       https://github.com/deoplete-plugins/deoplete-jedi/archive/%{deojedi_lc}/deoplete-jedi-%{deojedi_sc}.tar.gz
@@ -84,7 +87,7 @@ Provides:       bundled(Vim-Jinja2-Syntax) = %{jinja_sc}
 Provides:       bundled(vim-vimux) = %{vimux_sc}
 Provides:       bundled(tmux-themepack) = %{muxtheme_sc}
 Provides:       bundled(vim-auto-save) = %{vas_version}
-Provides:       bundled(deoplete-nvim) = %{deo_version}
+Provides:       bundled(deoplete-nvim) = %{deoplete_sc}
 Provides:       bundled(nvim-yarp) = %{yarp_sc}
 Provides:       bundled(vim-hug-neovim-rpc) = %{hug_sc}
 Provides:       bundled(deoplete-jedi) = %{deojedi_sc}
@@ -108,7 +111,7 @@ file.
 %autosetup -D -b 4 -n vimux-%{vimux_lc}
 %autosetup -D -b 5 -n tmux-themepack-%{muxtheme_lc}
 %autosetup -D -b 7 -n vim-auto-save-%{vas_version}
-%autosetup -D -b 8 -n deoplete.nvim-%{deo_version}
+%autosetup -D -b 8 -n deoplete.nvim-%{deoplete_lc}
 %autosetup -D -b 9 -n nvim-yarp-%{yarp_lc}
 %autosetup -D -b 10 -n vim-hug-neovim-rpc-%{hug_lc}
 %autosetup -D -b 11 -n deoplete-jedi-%{deojedi_lc}
@@ -143,7 +146,7 @@ cp -ar %{_builddir}/salt-vim-%{salt_lc} %{buildroot}%{_datarootdir}/%{name}/bund
 cp -ar %{_builddir}/Vim-Jinja2-Syntax-%{jinja_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/Vim-Jinja2-Syntax
 cp -ar %{_builddir}/vimux-%{vimux_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vimux
 cp -ar %{_builddir}/vim-auto-save-%{vas_version} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-auto-save
-cp -ar %{_builddir}/deoplete.nvim-%{deo_version} %{buildroot}%{_datarootdir}/%{name}/bundle/deoplete.nvim
+cp -ar %{_builddir}/deoplete.nvim-%{deoplete_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/deoplete.nvim
 cp -ar %{_builddir}/nvim-yarp-%{yarp_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/nvim-yarp
 cp -ar %{_builddir}/vim-hug-neovim-rpc-%{hug_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/vim-hug-neovim-rpc
 cp -ar %{_builddir}/deoplete-jedi-%{deojedi_lc} %{buildroot}%{_datarootdir}/%{name}/bundle/deoplete-jedi
@@ -170,6 +173,9 @@ cp -ar %{_builddir}/vim-ripgrep-%{vim_rg_version} %{buildroot}%{_datarootdir}/%{
 
 
 %changelog
+* Fri Oct 30 2026 Robby Callicotte <rcallicotte@fedoraproject.org> - 2026.1-1
+- Update to version 2026.1
+
 * Wed Apr 23 2025 Robby Callicotte <rcallicotte@fedoraproject.org> - 2025.3-1
 - Updated to version 2025.3
 
